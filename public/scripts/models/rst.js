@@ -1,4 +1,6 @@
 Neighborhood.all = [];
+Popularity.all = [];
+NearbyRes.all = [];
 
 // location
 function Neighborhood(data){
@@ -12,10 +14,11 @@ function Neighborhood(data){
 
 // popularity
 function Popularity(data){
-    
+    Object.keys(data).forEach(key => this[key] = data[key]);
+   
 }
 
 // nearbyRes
 function NearbyRes(data){
-    
+    Object.keys(data).forEach(key => this[key] = data[key]);   
 }
