@@ -20,5 +20,17 @@ function Popularity(data){
 
 // nearbyRes
 function NearbyRes(data){
+
     Object.keys(data).forEach(key => this[key] = data[key]);   
 }
+
+//Res Detail
+function getID(id){
+    for(index in NearbyRes.all){
+       if(id == NearbyRes.all[index].restaurant.id){
+           console.log(NearbyRes.all[index].restaurant.name)
+           console.log(NearbyRes.all[index].restaurant.cuisines)
+       }
+    }
+    }
+
