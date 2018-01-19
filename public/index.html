@@ -9,9 +9,19 @@
         <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
       </script>
 
+      <script id="restaurant-template" type="text/x-handlebars-template">
+
+        <article class="clearfix" rst-image= "{{this.thumb_url}}" data-category="{{category}}">
+  
+          <header>
+            <h1>{{locality}}</h1>
+            <h1>{{address}}</h1>
+        </script>
+
 </head>
+
 <body>
-    <div id="coords"></div>
+    <div id="restaurants-container"></div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -34,11 +44,29 @@
                     Neighborhood.all = new Neighborhood(res.location);
                     Popularity.all = new Popularity(res.popularity.top_cuisines)
                     NearbyRes.all = new NearbyRes(res.nearby_restaurants)
-
-                    console.log(est.location)
+                    var theTemplateScript = $("#restaurant-template").html();
+                    // Compile the template
+                    var theTemplate = Handlebars.compile(theTemplateScript);
+                
+                
+                
+                
+                    // Pass our data to the template
+                    var theCompiledHtml = theTemplate(Neighborhood.all.city_name);
+                
+                    // Add the compiled html to the page
+                    for(index in NearbyRes.all){
+                    $('#restaurants-container').append(new NearbyRes(NearbyRes.all[index].restaurant.location).toHtml())
+                        
+                        
+                    
+                    }
                 })
                 .catch(function(err){ console.error(err)});
+
+                
             });
           </script>
+
 </body>
 </html>
