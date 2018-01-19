@@ -5,9 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JASON TEST DATA</title>
-    <script id="coords-template" type="text/x-handlebars-template">
-        <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
-      </script>
+      <script id="resturant-template" type="text/x-handlebars-template">
+
+        <article class="clearfix" rst-image= "{{this.thumb_url}}" data-category="{{category}}">
+  
+          <header>
+  
+            <h1>{{this.title}}</h1>
+            <h1>{{this.name}}</h1>
+            <h1>{{this.title}}</h1>
+            <h1>{{this.title}}</h1>
+            <h1>{{this.price_range}}</h1>
+            <h1>{{this.rating_text}}</h1>
+           
+            
+  
+            <div class="byline">
+  
+  
 
 </head>
 <body>
@@ -17,7 +32,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="scripts/models/rst.js"></script>
         <script>
             var est = '',
                 userCoord = '';
@@ -28,16 +42,12 @@
                   lat: position.coords.latitude
               }
               console.log('userCoord lat',userCoord.lat,'userCoord long',userCoord.long);
-              $.post('http://localhost:3000/api/v2.1/geocode',userCoord)
+              $.post('http://localhost:3000/api/v2.1/establishments',userCoord)
                 .then(function(data){
-                    var res = JSON.parse(data)
-                    Neighborhood.all = new Neighborhood(res.location);
-                    Popularity.all = new Popularity(res.popularity.top_cuisines)
-                    NearbyRes.all = new NearbyRes(res.nearby_restaurants)
-
-                    console.log(est.location)
+                    est = JSON.parse(data)
+                    console.log(est.establishments)
                 })
-                .catch(function(err){ console.error(err)});
+                .catch(function(err){ console.error(err)})
             });
           </script>
 </body>
