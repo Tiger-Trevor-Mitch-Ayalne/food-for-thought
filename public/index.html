@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JASON TEST DATA</title>
-    <script id="coords-template" type="text/x-handlebars-template">
-        <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+    <script id="detail-template" type="text/x-handlebars-template">
+        <h1>{{name}}</h1>
+        <img src="{{featured_image}}">
+        <ul>
+            <li>Cuisines: {{cuisines}}</li>
+            <li>Cost for Two: ${{average_cost_for_two}}</li>
+            <li>Rating: {{aggregate_rating}}</li>
+            <li>Website: <a href="{{url}}">{{name}}</a></li>
+        </ul> 
+    
       </script>
 
 </head>
 <body>
     
     <div id="coords"></div>
-
+    <div id="detail-view"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -36,7 +44,41 @@
                     Popularity.all = new Popularity(res.popularity.top_cuisines)
                     NearbyRes.all = new NearbyRes(res.nearby_restaurants)
 
-                    console.log(est.location)
+                    function getID(id){
+                       for(index in NearbyRes.all){
+                           if(id == NearbyRes.all[index].restaurant.id){
+                               // Grab the template script
+                               var theTemplateScript = $("#detail-template").html();
+                               // Compile the template
+                               var theTemplate = Handlebars.compile(theTemplateScript);
+                               var context = {
+                                   cuisines:NearbyRes.all[index].restaurant.cuisines,
+                                   average_cost_for_two:NearbyRes.all[index].restaurant.average_cost_for_two,
+                                   currency:NearbyRes.all[index].restaurant.currency,
+                                   featured_image:NearbyRes.all[index].restaurant.featured_image,
+                                   address:NearbyRes.all[index].restaurant.address,
+                                   city:NearbyRes.all[index].restaurant.city,
+                                   zipcode:NearbyRes.all[index].restaurant.zipcode,
+                                   latitude:NearbyRes.all[index].restaurant.latitude,
+                                   longitude:NearbyRes.all[index].restaurant.longitude,
+                                   menu_url:NearbyRes.all[index].restaurant.menu_url,
+                                   name:NearbyRes.all[index].restaurant.name,
+                                   price_range:NearbyRes.all[index].restaurant.price_range,
+                                   aggregate_rating:NearbyRes.all[index].restaurant.user_rating.aggregate_rating,
+                                   votes:NearbyRes.all[index].restaurant.votes,
+                                   url:NearbyRes.all[index].restaurant.url
+
+                               }
+                               // Pass our data to the template
+                               var theCompiledHtml = theTemplate(context);
+
+                               // Add the compiled html to the page
+                               $('#detail-view').html(theCompiledHtml);
+                           }
+                       }
+                   }
+
+                   getID('16720700');
                 })
                 .catch(function(err){ console.error(err)});
             });
