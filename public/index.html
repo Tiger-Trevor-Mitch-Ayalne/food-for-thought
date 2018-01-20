@@ -10,81 +10,30 @@
       </script>
       <script id="restaurants-template" type="text/x-handlebars-template">
 
-        <p> average_cost_for_two= {{average_cost_for_two}}</p>
-        <p> cuisines= {{cuisines}}</p>
-        <p> featured_image= {{featured_image}}</p>
-        <p> has_online_delivery= {{has_online_delivery}}</p>
-        <p> has_table_booking= {{has_table_booking}}</p>
-        <p> id= {{id}}</p>
-        <p> address= {{address}}</p>
-        <p> city= {{city}}</p>
-        <p> locality= {{locality}}</p>
-        <p> locality_verbose= {{locality_verbose}}</p>
-        <p> longitude= {{longitude}}</p>
-        <p> latitude= {{latitude}}</p>
-        <p> zipcode= {{zipcode}}</p>
-        <p> menu_url= {{menu_url}}</p>
-        <p> name= {{name}}</p>
-        <p> photos_url= {{photos_url}}</p>
-        <p> price_range= {{price_range}}</p>
-        <p> aggregate_rating= {{aggregate_rating}}</p>
-        <p> rating_color= {{rating_color}}</p>
-        <p> rating_text {{rating_text}}</p>
-        <p> votes= {{votes}}</p>
-        <hr>
-      </script>
+     </script>
 </head>
 <body>
-    <div id="detail-view"></div>
+    <div id="detail-view" class="page">
+        <h1>Detail View</h1>
+        <div id="detail-slot"></div>
+    </div>
+    <div id="list-view" class="page">
+        <h1>List View</h1>
+        <div id="list-slot"></div>
+    </div>
+
     <div id="restaurants-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script src="scripts/models/rst.js"></script>
-        <script>
-            var est = '',
-                userCoord = '';
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log('position.coords.latitude',position.coords.latitude,'position.coords.longitude',position.coords.longitude);
-              userCoord = {
-                  long: position.coords.longitude,
-                  lat: position.coords.latitude
-              }
-              console.log('userCoord lat',userCoord.lat,'userCoord long',userCoord.long);
-              $.post('http://localhost:3000/api/v2.1/geocode',userCoord)
-                .then(function(data){
-                    var res = JSON.parse(data)
-                    console.log('results',res.nearby_restaurants)
-                    Neighborhood.all = new Neighborhood(res.location);
-                    Popularity.all = new Popularity(res.popularity.top_cuisines)
-
-                    for(index in res.nearby_restaurants){
-                        NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
-                    }
-                    NearbyRes.all.forEach(a => $('#restaurants-container').append(a.toHtml()));
-
-                    function getID(id){
-                        for(index in NearbyRes.all){console.log(NearbyRes.all[index].id)}
-
-                        for(index in NearbyRes.all){
-                            if(id == NearbyRes.all[index].id){
-                                // Grab the template script
-                                var theTemplateScript = $("#detail-template").html();
-                                var theTemplate = Handlebars.compile(theTemplateScript);
- 
-                                var theCompiledHtml = theTemplate(NearbyRes.all[index]);
-
-                                // Add the compiled html to the page
-                                $('#detail-view').html(theCompiledHtml);
-                            }
-                        }
-                    }
-                    getID('16720700');
-
-                })
-                .catch(function(err){ console.error(err)});
-            });
-          </script>
+    <script src="scripts/views/list-view.js"></script>
+    <script src="scripts/views/detail-view.js"></script>
+    <script src="scripts/views/admin-view.js"></script>
+    <script src="scripts/views/error-view.js"></script>
+    <script src="scripts/controllers/routes.js"></script>
 </body>
 </html>
