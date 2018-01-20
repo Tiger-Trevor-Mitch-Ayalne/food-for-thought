@@ -4,34 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/icons.css">
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/layout.css">
     <title>JASON TEST DATA</title>
-    <script id="detail-template" type="text/x-handlebars-template">
-        <p style="background:orange;"> {{cuisines}} will cost  ${{average_cost_for_two}} for 2 guests </p>
-      </script>
       <script id="restaurants-template" type="text/x-handlebars-template">
+       
+        <div id="rst-top-level">
+            <div id="img-info">
+                <div id="rst-img">
+                   <img id ="featured-image" src={{"featured_image"}}>   
+                </div>                 
+            </div>
 
-        <p> average_cost_for_two= {{average_cost_for_two}}</p>
-        <p> cuisines= {{cuisines}}</p>
-        <p> featured_image= {{featured_image}}</p>
-        <p> has_online_delivery= {{has_online_delivery}}</p>
-        <p> has_table_booking= {{has_table_booking}}</p>
-        <p> id= {{id}}</p>
-        <p> address= {{address}}</p>
-        <p> city= {{city}}</p>
-        <p> locality= {{locality}}</p>
-        <p> locality_verbose= {{locality_verbose}}</p>
-        <p> longitude= {{longitude}}</p>
-        <p> latitude= {{latitude}}</p>
-        <p> zipcode= {{zipcode}}</p>
-        <p> menu_url= {{menu_url}}</p>
-        <p> name= {{name}}</p>
-        <p> photos_url= {{photos_url}}</p>
-        <p> price_range= {{price_range}}</p>
-        <p> aggregate_rating= {{aggregate_rating}}</p>
-        <p> rating_color= {{rating_color}}</p>
-        <p> rating_text {{rating_text}}</p>
-        <p> votes= {{votes}}</p>
+        <div id="rst-info"> 
+            <p id="rst-name">{{name}}</p> 
+            <p id="locality">{{locality_verbose}}</p>
+            <p id="address">Address: {{address}}</p>
+        </div>          
+
+        <div id ="detail">          
+            <p id="rating">{{aggregate_rating}}</p>
+            <p id="votes">{{votes}} </p>
+        </div>
+        
+        
+        <div id="more-info"> 
+            CUISINES: {{cuisines}}
+            <br>
+            COST FOR TWO: ${{average_cost_for_two}}</p> 
+        </div>   
+        
+        <div id="menu">
+            <a href="{{menu_url}}">Menu</a>
+        </div>
+        
+
+        </div>
+            
+       
+   
+       
+
+        <!-- <p> rating_color= {{rating_color}}</p>
+        <p> rating_text {{rating_text}}</p> -->
+        
         <hr>
+    </div>
       </script>
 </head>
 <body>
