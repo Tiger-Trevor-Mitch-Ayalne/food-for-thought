@@ -58,7 +58,6 @@
                     console.log('results',res.nearby_restaurants)
                     Neighborhood.all = new Neighborhood(res.location);
                     Popularity.all = new Popularity(res.popularity.top_cuisines)
-
                     for(index in res.nearby_restaurants){
                         NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
                     }
@@ -82,9 +81,13 @@
                     }
                     getID('16720700');
 
+
                 })
                 .catch(function(err){ console.error(err)});
+
+                
             });
           </script>
+
 </body>
 </html>

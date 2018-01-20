@@ -2,6 +2,7 @@ Neighborhood.all = [];
 Popularity.all = [];
 NearbyRes.all = [];
 
+let restaurants  ;
 // location
 function Neighborhood(data){
     this.title = data.title;
@@ -47,4 +48,3 @@ NearbyRes.prototype.toHtml = function () {
     var template = Handlebars.compile($('#restaurants-template').text());
     return template(this);
   };
-  
