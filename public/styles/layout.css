@@ -1,0 +1,118 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700,300);
+
+@import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
+
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+body {
+    background: red;
+}
+#title {
+    text-align: center;
+    font-family: lobster;
+}
+#res-detail {
+    background: white;
+}
+#detail-view {
+    text-align: center;
+    background: white;
+    width:300px;
+    width: 50%;
+    margin: 0 auto;
+    padding:30px;
+    border: 2px;
+    border-style: solid;
+    
+}
+
+nav {
+    width:125px;
+    padding:0 25px 0 25px;
+    background: grey;
+    background-size: cover;
+    position: fixed;
+    top:50%;
+    height:5%;
+    margin:0 0 0 -150px;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    transition: .5s ease-in;
+    opacity: .99;
+    border: 2px;
+    border-style: solid;
+    
+
+    
+}
+
+nav.menushow .menu-btn {
+    -webkit-transform: rotate(45deg) !important;
+    -moz-transform: rotate(45deg) !important;
+    -o-transform: rotate(45deg) !important;
+    -ms-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+
+}
+
+.menushow {
+    margin: 0;
+    box-shadow:0 0 50px 0 rgba(0,0,0,.5);
+     top:0px;
+    height:100%;
+}
+
+nav ul {
+    margin:60px 0 0 0;
+}
+
+nav a, .menu-btn a {
+    color:#fff;
+    font-size: 18px;
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+    padding:10px 15px;
+    display: block;
+    -webkit-transition: .25s ease-in;
+    -moz-transition: .25s ease-in;
+    -o-transition: .25s ease-in;
+    -ms-transition: .25s ease-in;
+    transition: .25s ease-in;
+
+}
+
+nav a:hover {
+    background: rgba(255,255,255,.125);
+}
+
+.menu-btn {
+    position: absolute;
+    right:8px;
+    top:4px;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    transition: .5s ease-in;
+    
+
+}
+
+.menu-btn a {
+    font-family: Arial;
+    font-weight: 900;
+    font-size: 16px;
+    text-align: center;
+    vertical-align:middle;
+    height:30px;
+    padding:3px;
+}
+
+.menu-btn a:hover {
+    background: none;
+}
+
+

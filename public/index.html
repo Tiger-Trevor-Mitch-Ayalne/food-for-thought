@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/layout.css">
     <title>JASON TEST DATA</title>
     <script id="detail-template" type="text/x-handlebars-template">
+        <div id="res detail">
         <h1>{{name}}</h1>
         <img src="{{featured_image}}">
         <ul>
@@ -14,12 +16,39 @@
             <li>Rating: {{aggregate_rating}}</li>
             <li>Website: <a href="{{url}}">{{name}}</a></li>
         </ul> 
-    
+    </div>
       </script>
 
 </head>
 <body>
     
+
+    
+    <h1 id="title">Chow Down</h1>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".menu-btn").click(function(event){
+              event.preventDefault();
+              $("nav").toggleClass("menushow");
+              
+              
+            });
+          });
+        </script>
+            
+         <nav>
+                        <div class="menu-btn">
+                            <a href="#">+</a>
+                        </div>
+                        <h1>Filter By</h1>
+                        
+                            <h3><a href="#">Cuisines</a></h3>
+                            <h3></h3><a href="#">Price</a></h3>
+                            <h3></h3><a href="#">Delivery</a></h3>
+                        
+        </nav>
+
     <div id="coords"></div>
     <div id="detail-view"></div>
 
