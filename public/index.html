@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/31d5802389/UntitledProject/style.css">
     <title>JASON TEST DATA</title>
     <script id="detail-template" type="text/x-handlebars-template">
         <div id="res detail">
         <h1>{{name}}</h1>
-        <img src="{{featured_image}}">
+        <img id="detail-image" src="{{featured_image}}">
         <ul>
             <li>Cuisines: {{cuisines}}</li>
             <li>Cost for Two: ${{average_cost_for_two}}</li>
@@ -21,11 +22,59 @@
 
 </head>
 <body>
-    
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var submitIcon = $('.searchbox-icon');
+            var inputBox = $('.searchbox-input');
+            var searchBox = $('.searchbox');
+            var isOpen = false;
+            submitIcon.click(function(){
+                if(isOpen == false){
+                    searchBox.addClass('searchbox-open');
+                    inputBox.focus();
+                    isOpen = true;
+                } else {
+                    searchBox.removeClass('searchbox-open');
+                    inputBox.focusout();
+                    isOpen = false;
+                }
+            });  
+             submitIcon.mouseup(function(){
+                    return false;
+                });
+            searchBox.mouseup(function(){
+                    return false;
+                });
+            $(document).mouseup(function(){
+                    if(isOpen == true){
+                        $('.searchbox-icon').css('display','block');
+                        submitIcon.click();
+                    }
+                });
+        });
+            function buttonUp(){
+                var inputVal = $('.searchbox-input').val();
+                inputVal = $.trim(inputVal).length;
+                if( inputVal !== 0){
+                    $('.searchbox-icon').css('display','none');
+                } else {
+                    $('.searchbox-input').val('');
+                    $('.searchbox-icon').css('display','block');
+                }
+            }
+        </script>
+        <div class="container">
+                <form class="searchbox">
+                    <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                    <input type="submit" class="searchbox-submit" value="GO">
+                    <span class="searchbox-icon" class="icon-search">&#x1f50d;</span>
+                </form>
+            </div>
 
     
     <h1 id="title">Chow Down</h1>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        
     <script>
         $(document).ready(function(){
             $(".menu-btn").click(function(event){
@@ -48,9 +97,27 @@
                             <h3></h3><a href="#">Delivery</a></h3>
                         
         </nav>
+      
 
     <div id="coords"></div>
     <div id="detail-view"></div>
+    <script>
+            function initMap() {
+                var uluru = {lat: 47.6128967000, lng: -122.3405801000};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 15,
+                  center: uluru
+                });
+                var marker = new google.maps.Marker({
+                  position: uluru,
+                  map: map
+                });
+              }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXzw_66pIoJMRo1Am2TpNyN0XaIl-0QKY&callback=initMap">
+            </script>
+            <div id="map"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -106,7 +173,7 @@
                            }
                        }
                    }
-
+                   
                    getID('16720700');
                 })
                 .catch(function(err){ console.error(err)});
@@ -114,6 +181,32 @@
      
            
           </script>
-        
+
+          <script>
+          window.onscroll = function() {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  if (window.scrollY != 0) {
+    setTimeout(function() {
+      window.scrollTo(0, window.scrollY - 900);
+      topFunction();
+    }, 40);
+  }
+}
+          </script>
+         <button onclick="topFunction()" id="myBtn">
+                <span class="icon-arrow-up"></span>
+           </button>
 </body>
 </html>
