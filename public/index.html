@@ -22,7 +22,7 @@
 
 <body>
     <div id="restaurants-container"></div>
-
+    <div id="restaurants-top-level"</div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
@@ -57,10 +57,11 @@
                     // Add the compiled html to the page
                     for(index in NearbyRes.all){
                     $('#restaurants-container').append(new NearbyRes(NearbyRes.all[index].restaurant.location).toHtml())
-                        
-                        
-                    
+                                        
                     }
+                    // for(index in Neighborhood.all){
+                    //     $('#restaurants-top-level').append(new Neighborhood(Neighborhood.all[index].))
+                    // }
                 })
                 .catch(function(err){ console.error(err)});
 
