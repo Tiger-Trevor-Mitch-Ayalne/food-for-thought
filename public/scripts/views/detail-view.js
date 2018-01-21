@@ -43,8 +43,26 @@ var app = app || {};
 <!-- <p> rating_color= {{rating_color}}</p>
 <p> rating_text {{rating_text}}</p> -->
 
-<hr>
+
 </div>
+
+<script>
+function initMap() {
+    var uluru = {lat: 47.6128967000, lng: -122.3405801000};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXzw_66pIoJMRo1Am2TpNyN0XaIl-0QKY&callback=initMap">
+</script>
+<div id="map"></div>
     `
     const template = Handlebars.compile(markup)
 

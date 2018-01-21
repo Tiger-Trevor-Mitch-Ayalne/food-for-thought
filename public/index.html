@@ -8,20 +8,33 @@
     <link rel="stylesheet" href="./styles/icons.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/4d1350745c/UntitledProject/style.css">
     <title>JASON TEST DATA</title>
       <script id="restaurants-template" type="text/x-handlebars-template">
-       
         
       </script>
 </head>
 <body>
-    <form>
-        <input type="text" id="zip">
-        <button type="submit" id="searchByZIP">Search</button>
-    </form>
+    <nav id="top-nav">
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <span class="icon-pacman"></span>
+                <div id="title">Chow Down</div>
+                <div class="container">
+                        <form class="searchbox">
+                            <input type="search" id="zip" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                            <input type="submit" id="searchByZIP" class="searchbox-submit" value="GO">
+                            <span class="searchbox-icon" class="icon-search">&#x1f50d;</span>
+                        </form>
+                    </div>
+        <!-- <form>
+            <input type="text" id="zip">
+            <button type="submit" id="searchByZIP">Search</button>
+        </form> -->
+    </nav>
     <div id="detail-view" class="page">
         <h1>Detail View</h1>
         <div id="detail-slot"></div>
+        
     </div>
     <div id="list-view" class="page">
         <h1>List View</h1>
@@ -61,5 +74,31 @@
         });
     });
     </script>
+
+        <script>
+        $(document).ready(function(){
+            $(".menu-btn").click(function(event){
+              event.preventDefault();
+              $("nav").toggleClass("menushow");
+            });
+          });
+        </script>
+            
+         <nav>
+                        <div class="menu-btn">
+                            <a href="#">+</a>
+                        </div>
+                        <h1>Filter By</h1>
+                        
+                            <h3><a href="#">Cuisines</a></h3>
+                            <h3></h3><a href="#">Price</a></h3>
+                            <h3></h3><a href="#">Delivery</a></h3>
+                        
+        </nav>
+
+    <button onclick="topFunction()" id="myBtn">
+        <span class="icon-circle-up"></span>
+   </button>
+
 </body>
 </html>

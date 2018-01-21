@@ -1,16 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700,300);
+
+@import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
+
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One|Lobster);
 /* *{
     border: 1px solid;
 } */
+body {
+    background: #eb3930;
+}
+h1{
+    opacity:0;
+}
+#top-nav {
+    display:flex;
+    flex-direction:row;
+    width: 91%;
+    top: 0;
+    right:0;
+    position: fixed;
+    border-radius: 0px;
 
+}
+#title {
+    font-family: 'Lobster';
+    font-size: 18px;
+    position:fixed;
+    top:1%;
+    left:38%;
+    
+    
+}
+.icon-pacman{
+    position:fixed;
+    top:2%
+    
+}
+.icon-pacman:before {
+    content: "\e916";
+  }
 
 .rst-top-level {
-    background: white;
+    background: #faf5e6;
     width: 75%;
-    margin: 0 auto;
-    padding:2px;
-    border: 2px;
-    border-style: solid;
+    margin: auto;
+    margin-bottom: 5px;
+    padding: 2px;
+    border:2px;
+    border-style:solid;
     position: relative;
+    font-size:12px;
+    border-radius:10px;
 }
 
 .img-info {
@@ -30,6 +70,7 @@
 
 .rst-name {
     font-weight: bold;
+    font-family: 'Fjalla One';
     margin-top: 0%;
     margin-bottom: 0%;
     }
@@ -56,7 +97,200 @@
     right: 4px;
     top: 6px;
 } 
+
+.menu {
+    font-weight:bolder;
+}
+
+.icon-circle-up:before {
+    content: "\ea41";
+    font-size:16px;
+  }
+
+#myBtn {
+    bottom:0;
+    right:0;
+    position:fixed;
+    width: 30px;
+	height: 30px;
+	background: grey;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	border:none;
+}
     
+nav {
+    width:125px;
+    padding:0 25px 0 25px;
+    background: grey;
+    background-size: cover;
+    position: fixed;
+    top:50%;
+    height:5%;
+    margin:0 0 0 -150px;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    transition: .5s ease-in;
+    opacity: .99;
+    border-radius:10px;
+}
+
+nav.menushow .menu-btn {
+    -webkit-transform: rotate(45deg) !important;
+    -moz-transform: rotate(45deg) !important;
+    -o-transform: rotate(45deg) !important;
+    -ms-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+
+}
+
+.menushow {
+    margin: 0;
+    box-shadow:0 0 50px 0 rgba(0,0,0,.5);
+     top:0px;
+    height:100%;
+}
+
+nav ul {
+    margin:60px 0 0 0;
+}
+
+nav a, .menu-btn a {
+    color:black;
+    font-size: 18px;
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+    padding:10px 15px;
+    display: block;
+    -webkit-transition: .25s ease-in;
+    -moz-transition: .25s ease-in;
+    -o-transition: .25s ease-in;
+    -ms-transition: .25s ease-in;
+    transition: .25s ease-in;
+
+}
+
+nav a:hover {
+    background: rgba(255,255,255,.125);
+}
+
+.menu-btn {
+    position: absolute;
+    right:8px;
+    top:4px;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    transition: .5s ease-in;
+    
+
+}
+
+.menu-btn a {
+    font-family: Arial;
+    font-weight: 900;
+    font-size: 16px;
+    text-align: center;
+    vertical-align:middle;
+    height:30px;
+    padding:3px;
+}
+
+.menu-btn a:hover {
+    background: none;
+}
+#map {
+    width: 60%;
+    height: 200px;;
+    background-color: grey;
+     margin: 0 auto;
+    padding:30px;
+    border: 2px;
+    border-style: solid;
+    z-index: -1;
+    border-radius:10px;
+  }
+
+  .searchbox{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    min-width:50px;
+    width:0%;
+    height:30px;
+   
+    overflow:hidden;
+    
+    
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    -ms-transition: width 0.3s;
+    -o-transition: width 0.3s;
+    transition: width 0.3s;
+}
+
+.searchbox-input{
+    top:0;
+    right:0;
+    border:0;
+    outline:0;
+    background: #faf5e6;
+    width:100%;
+    height:50px;
+    margin:0;
+    padding:0px 55px 0px 20px;
+    font-size:16px;
+    color: black;
+}
+.searchbox-input::-webkit-input-placeholder {
+    color: black;
+}
+.searchbox-input:-moz-placeholder {
+    color: black;
+}
+.searchbox-input::-moz-placeholder {
+    color: black;
+}
+.searchbox-input:-ms-input-placeholder {
+    color: black;
+}
+
+.searchbox-icon,
+.searchbox-submit{
+    width:50px;
+    height:50px;
+    display:block;
+    position:absolute;
+    top:0;
+    font-family:verdana;
+    font-size:24px;
+    right:0;
+    padding:0;
+    margin:0;
+    border:0;
+    outline:0;
+    line-height:50px;
+    text-align:center;
+    cursor:pointer;
+    color:black;
+    background:grey;
+}
+
+
+
+.searchbox-open{
+    width:50%;
+    border:1px;
+    border-style:solid;
+}
+.icon-search:before {
+    content: "\1f50d";
+  }
 
 /* <div id="rst-top-level">
 <div id="img-info">
