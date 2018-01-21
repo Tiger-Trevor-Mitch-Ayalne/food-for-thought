@@ -1,8 +1,12 @@
+var app = app || {};
+
+(module => {
+
 Neighborhood.all = [];
 Popularity.all = [];
 NearbyRes.all = [];
 
-let restaurants  ;
+
 // location
 function Neighborhood(data){
     this.title = data.title;
@@ -11,14 +15,11 @@ function Neighborhood(data){
     this.longitude = data.longitude;
     this.city_name = data.city_name;
 }
-
-
 // popularity
 function Popularity(data){
     Object.keys(data).forEach(key => this[key] = data[key]);
    
 }
-
 // nearbyRes
 function NearbyRes(data){
     this.average_cost_for_two = data.average_cost_for_two;
@@ -44,7 +45,68 @@ function NearbyRes(data){
     this.votes = data.user_rating.votes;   
 }
 
-NearbyRes.prototype.toHtml = function () {
-    var template = Handlebars.compile($('#restaurants-template').text());
-    return template(this);
-  };
+NearbyRes.fetchAll = (callback) =>{
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log('position',position)
+            var userCoord = {
+                long: position.coords.longitude,
+                lat: position.coords.latitude
+            }
+            $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
+            .then(function(data){
+                var res = JSON.parse(data)
+                for(index in res.nearby_restaurants){
+                    NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+                }
+            }).then(()=>{
+                callback()
+            })
+            .catch(function(err){ console.error(err)});
+        })
+    }
+    // if(navigator.geolocation){
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+    //         console.log('position',position)
+    //         var userCoord = {
+    //             long: position.coords.longitude,
+    //             lat: position.coords.latitude
+    //         }
+    //         $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
+    //         .then(function(data){
+    //             var res = JSON.parse(data)
+    //             for(index in res.nearby_restaurants){
+    //                 NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+    //             }
+    //         }).then(()=>{
+    //             callback()
+    //         })
+    //         .catch(function(err){ console.error(err)});
+    //     }, function(err){
+    //         console.log(err);
+    //         var localZip = localStorage.getItem('zipData');
+    //         var parsedZip = JSON.parse(localZip)
+    //         console.log('http://localhost:3000/api/v2.1/geocode',parsedZip)
+    //         $.get('http://localhost:3000/api/v2.1/geocode',parsedZip)
+    //         .then(function(data){
+    //             var res = JSON.parse(data)
+    //             for(index in res.nearby_restaurants){
+    //                 NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+    //             }
+    //             renderThings()
+    //         })
+    //         .catch(function(err){ console.error(err)});
+    //     })
+    // }
+
+NearbyRes.fetchOne = (id) =>{
+    for(index in NearbyRes.all){
+        if(id == NearbyRes.all[index].id){
+            console.log('NearbyRes.all[index]',NearbyRes.all[index])
+            NearbyRes.res_id = NearbyRes.all[index];
+        }
+    }
+}
+
+  module.NearbyRes = NearbyRes;
+
+})(app)

@@ -14,8 +14,9 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
-app.post('/api/v2.1/geocode', (req, res) => {
-    const url = `https://developers.zomato.com/api/v2.1/geocode?lat=${req.body.lat}&lon=${req.body.long}`;
+app.get('/api/v2.1/geocode', (req, res) => {
+    const url = `https://developers.zomato.com/api/v2.1/geocode?${req.query.lat}&lon=${req.query.long}`;
+    console.log('new url',url)
     superagent.get(url)
       .set(`user-key`, `c432c4bb526c687aabed6e596d23735f`)
       .then(
@@ -24,4 +25,7 @@ app.post('/api/v2.1/geocode', (req, res) => {
       )
   })
 
+app.get('/*', cors(),(request, response) => {
+    response.sendFile('index.html', { root: './public' });
+})
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

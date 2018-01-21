@@ -11,103 +11,55 @@
     <title>JASON TEST DATA</title>
       <script id="restaurants-template" type="text/x-handlebars-template">
        
-        <div class="rst-top-level">
-            <div class="img-info">
-                <div class="rst-img">
-                   <img class ="featured-image" src={{"featured_image"}}>   
-                </div>                 
-            </div>
-
-        <div class="rst-info"> 
-            <p class="rst-name">{{name}}</p> 
-            <p class="locality">{{locality_verbose}}</p>
-            <p class="address">Address: {{address}}</p>
-        </div>          
-
-        <div class="detail">          
-            <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
-            <p class="votes">Votes: {{votes}} </p>
-        </div>
         
-        
-        <div class="more-info"> 
-            CUISINES: {{cuisines}}
-            <br>
-            COST FOR TWO: ${{average_cost_for_two}}</p> 
-        </div>   
-        
-        <div class="menu">
-            <a href="{{menu_url}}">Menu</a>
-        </div>
-        
-
-        </div>
-            
-       
-   
-       
-
-        <!-- <p> rating_color= {{rating_color}}</p>
-        <p> rating_text {{rating_text}}</p> -->
-        
-        <hr>
-    </div>
       </script>
 </head>
 <body>
-    <div id="detail-view"></div>
+    <form>
+        <input type="text" id="zip">
+        <button type="submit" id="searchByZIP">Search</button>
+    </form>
+    <div id="detail-view" class="page">
+        <h1>Detail View</h1>
+        <div id="detail-slot"></div>
+    </div>
+    <div id="list-view" class="page">
+        <h1>List View</h1>
+        <div id="list-slot"></div>
+    </div>
+
     <div id="restaurants-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script src="scripts/models/rst.js"></script>
-        <script>
-            var est = '',
-                userCoord = '';
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log('position.coords.latitude',position.coords.latitude,'position.coords.longitude',position.coords.longitude);
-              userCoord = {
-                  long: position.coords.longitude,
-                  lat: position.coords.latitude
-              }
-              console.log('userCoord lat',userCoord.lat,'userCoord long',userCoord.long);
-              $.post('http://localhost:3000/api/v2.1/geocode',userCoord)
-                .then(function(data){
-                    var res = JSON.parse(data)
-                    console.log('results',res.nearby_restaurants)
-                    Neighborhood.all = new Neighborhood(res.location);
-                    Popularity.all = new Popularity(res.popularity.top_cuisines)
-                    for(index in res.nearby_restaurants){
-                        NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
-                    }
-                    NearbyRes.all.forEach(a => $('#restaurants-container').append(a.toHtml()));
-
-                    function getID(id){
-                        for(index in NearbyRes.all){console.log(NearbyRes.all[index].id)}
-
-                        for(index in NearbyRes.all){
-                            if(id == NearbyRes.all[index].id){
-                                // Grab the template script
-                                var theTemplateScript = $("#detail-template").html();
-                                var theTemplate = Handlebars.compile(theTemplateScript);
- 
-                                var theCompiledHtml = theTemplate(NearbyRes.all[index]);
-
-                                // Add the compiled html to the page
-                                $('#detail-view').html(theCompiledHtml);
-                            }
-                        }
-                    }
-                    getID('16720700');
-
-
-                })
-                .catch(function(err){ console.error(err)});
-
-                
-            });
-          </script>
-
+    <script src="scripts/views/list-view.js"></script>
+    <script src="scripts/views/detail-view.js"></script>
+    <script src="scripts/views/admin-view.js"></script>
+    <script src="scripts/views/error-view.js"></script>
+    <script src="scripts/controllers/routes.js"></script>
+    <script>
+     var zipData;
+    $(function(){
+        $('#searchByZIP').on('click',function(e){
+            e.preventDefault()
+            var zip = $('#zip').val();
+            console.log($('#zip').val())
+            $.get('http://api.zippopotam.us/us/'+zip)
+            .then((data)=>{
+                zipData = {
+                    zip:data['post code'],
+                    long:data.places[0].latitude,
+                    lat:data.places[0].longitude
+                }
+                localStorage.setItem('zipData',JSON.stringify(zipData));
+            })
+            .catch(function(err){ console.error(err)});
+        });
+    });
+    </script>
 </body>
 </html>
