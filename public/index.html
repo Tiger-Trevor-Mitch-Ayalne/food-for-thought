@@ -13,6 +13,10 @@
      </script>
 </head>
 <body>
+    <form>
+        <input type="text" id="zip">
+        <button type="submit" id="searchByZIP">Search</button>
+    </form>
     <div id="detail-view" class="page">
         <h1>Detail View</h1>
         <div id="detail-slot"></div>
@@ -35,5 +39,26 @@
     <script src="scripts/views/admin-view.js"></script>
     <script src="scripts/views/error-view.js"></script>
     <script src="scripts/controllers/routes.js"></script>
+    <script>
+     var zipData;
+    $(function(){
+        $('#searchByZIP').on('click',function(e){
+            e.preventDefault()
+            var zip = $('#zip').val();
+            console.log($('#zip').val())
+            $.get('http://api.zippopotam.us/us/'+zip)
+            .then((data)=>{
+                zipData = {
+                    zip:data['post code'],
+                    long:data.places[0].latitude,
+                    lat:data.places[0].longitude
+                }
+                localStorage.setItem('zipData',JSON.stringify(zipData));
+            })
+            .catch(function(err){ console.error(err)});
+        });
+    });
+
+    </script>
 </body>
 </html>

@@ -46,23 +46,58 @@ function NearbyRes(data){
 }
 
 NearbyRes.fetchAll = (callback) =>{
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var userCoord = {
-            long: position.coords.longitude,
-            lat: position.coords.latitude
-        }
-        $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
-        .then(function(data){
-            var res = JSON.parse(data)
-            for(index in res.nearby_restaurants){
-                NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log('position',position)
+            var userCoord = {
+                long: position.coords.longitude,
+                lat: position.coords.latitude
             }
-        }).then(()=>{
-            callback()
+            $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
+            .then(function(data){
+                var res = JSON.parse(data)
+                for(index in res.nearby_restaurants){
+                    NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+                }
+            }).then(()=>{
+                callback()
+            })
+            .catch(function(err){ console.error(err)});
         })
-        .catch(function(err){ console.error(err)});
-    })
-}
+    }
+    // if(navigator.geolocation){
+    //     navigator.geolocation.getCurrentPosition(function(position) {
+    //         console.log('position',position)
+    //         var userCoord = {
+    //             long: position.coords.longitude,
+    //             lat: position.coords.latitude
+    //         }
+    //         $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
+    //         .then(function(data){
+    //             var res = JSON.parse(data)
+    //             for(index in res.nearby_restaurants){
+    //                 NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+    //             }
+    //         }).then(()=>{
+    //             callback()
+    //         })
+    //         .catch(function(err){ console.error(err)});
+    //     }, function(err){
+    //         console.log(err);
+    //         var localZip = localStorage.getItem('zipData');
+    //         var parsedZip = JSON.parse(localZip)
+    //         console.log('http://localhost:3000/api/v2.1/geocode',parsedZip)
+    //         $.get('http://localhost:3000/api/v2.1/geocode',parsedZip)
+    //         .then(function(data){
+    //             var res = JSON.parse(data)
+    //             for(index in res.nearby_restaurants){
+    //                 NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+    //             }
+    //             renderThings()
+    //         })
+    //         .catch(function(err){ console.error(err)});
+    //     })
+    // }
+
 NearbyRes.fetchOne = (id) =>{
     for(index in NearbyRes.all){
         if(id == NearbyRes.all[index].id){

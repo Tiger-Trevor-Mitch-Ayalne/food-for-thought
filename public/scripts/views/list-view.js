@@ -12,7 +12,7 @@ var app = app || {};
         <p> has_table_booking= {{has_table_booking}}</p>
         
         <h1>
-            <a href="/detail-view/{{id}}" >{{id}}</a>
+            <a href="/detail-view/{{id}}" >{{name}}</a>
         </h1>
         <p> address= {{address}}</p>
         <p> city= {{city}}</p>

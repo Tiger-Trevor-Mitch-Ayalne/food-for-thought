@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 })
 app.get('/api/v2.1/geocode', (req, res) => {
     const url = `https://developers.zomato.com/api/v2.1/geocode?${req.query.lat}&lon=${req.query.long}`;
+    console.log('new url',url)
     superagent.get(url)
       .set(`user-key`, `c432c4bb526c687aabed6e596d23735f`)
       .then(
