@@ -1,0 +1,92 @@
+/* *{
+    border: 1px solid;
+} */
+
+
+.rst-top-level {
+    background: white;
+    width: 75%;
+    margin: 0 auto;
+    padding:2px;
+    border: 2px;
+    border-style: solid;
+    position: relative;
+}
+
+.img-info {
+    width: 35%;
+}
+
+.featured-image {
+    width: 100%;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+}
+
+.rst-info {
+}
+
+.rst-name {
+    font-weight: bold;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    }
+.locality {
+    margin-top: 0%;
+    margin-bottom: 0%
+}
+
+.address {
+    margin-top: 0%;
+}
+
+.rating {
+    color: white;
+    font-weight: bolder;
+    margin-bottom: 0px;
+    position: absolute;
+    right: 4px;
+    top: -8%;
+}
+
+.votes {
+    position: absolute;
+    right: 4px;
+    top: 6px;
+} 
+    
+
+/* <div id="rst-top-level">
+<div id="img-info">
+    <div id="rst-img">
+       <img id ="featured_image" src={{"featured_image"}}>                    
+    </div>
+
+  <div id="rst-info"> 
+            <p id="rst-name">{{name}}</p> 
+            <p id="locality">{{locality_verbose}}</p>
+            <br>
+            <p id="address">Address: {{address}}</p>
+        </div>
+</div>           
+
+<div id ="detail">          
+        <p id="rating">{{aggregate_rating}}</p>
+        <br>
+        <p id="votes">{{votes}} </p>
+</div>
+
+
+<div id="more-info"> 
+        CUISINES: {{cuisines}}
+        <br>
+        COST FOR TWO: ${{average_cost_for_two}}</p> 
+</div>   
+
+<div id="menu">
+<a href="{{menu_url}}">Menu</a>
+</div>
+
+</div> */
