@@ -11,32 +11,32 @@
     <title>JASON TEST DATA</title>
       <script id="restaurants-template" type="text/x-handlebars-template">
        
-        <div id="rst-top-level">
-            <div id="img-info">
-                <div id="rst-img">
-                   <img id ="featured-image" src={{"featured_image"}}>   
+        <div class="rst-top-level">
+            <div class="img-info">
+                <div class="rst-img">
+                   <img class ="featured-image" src={{"featured_image"}}>   
                 </div>                 
             </div>
 
-        <div id="rst-info"> 
-            <p id="rst-name">{{name}}</p> 
-            <p id="locality">{{locality_verbose}}</p>
-            <p id="address">Address: {{address}}</p>
+        <div class="rst-info"> 
+            <p class="rst-name">{{name}}</p> 
+            <p class="locality">{{locality_verbose}}</p>
+            <p class="address">Address: {{address}}</p>
         </div>          
 
-        <div id ="detail">          
-            <p id="rating">{{aggregate_rating}}</p>
-            <p id="votes">{{votes}} </p>
+        <div class="detail">          
+            <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
+            <p class="votes">Votes: {{votes}} </p>
         </div>
         
         
-        <div id="more-info"> 
+        <div class="more-info"> 
             CUISINES: {{cuisines}}
             <br>
             COST FOR TWO: ${{average_cost_for_two}}</p> 
         </div>   
         
-        <div id="menu">
+        <div class="menu">
             <a href="{{menu_url}}">Menu</a>
         </div>
         
