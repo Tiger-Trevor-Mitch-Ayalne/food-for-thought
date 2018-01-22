@@ -62,7 +62,34 @@ function initMap() {
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXzw_66pIoJMRo1Am2TpNyN0XaIl-0QKY&callback=initMap">
 </script>
-<div id="map"></div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+<button class="accordion">View on Map</button>
+<div class="panel">
+    <div id="map"></div>
+</div>
+
+<button class="accordion">Reviews</button>
+<div class="panel">
+    <div id="reviews">Some Reviews</div>
+</div>
+
+
     `
     const template = Handlebars.compile(markup)
 
