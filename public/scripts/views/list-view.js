@@ -5,35 +5,34 @@ var app = app || {};
 
     const markup = `
     <div class="rst-top-level">
-        <div class="img-info">
-            <div class="rst-img">
-                <img class="featured-image" src={{featured_image}}>
+        <div id="main-info">
+            <div class="img-info">
+                <div class="rst-img">
+                <img class ="featured-image" src={{"featured_image"}}>   
+                </div>                 
+            </div>
+        
+            <div class="rst-info"> 
+                <p class="rst-name">
+                <a href="/detail-view/{{id}}">{{name}}</a></p> 
+                <p class="locality">{{locality_verbose}}</p>
+                <p class="address">Address: {{address}}</p>
+            </div>          
+            
+            <div class="detail">          
+                <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
             </div>
         </div>
-
-        <div class="rst-info">
-        <a href="/detail-view/{{id}}">{{name}}</a>
-            <p class="locality">{{locality_verbose}}</p>
-            <p class="address">Address: {{address}}</p>
-        </div>
-
-        <div class="detail">
-            <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
-            <p class="votes">Votes: {{votes}} </p>
-        </div>
-
-        <div class="more-info">
-            CUISINES: {{cuisines}}
-            <br> COST FOR TWO: $ {{average_cost_for_two}}</p>
-        </div>
-
+        <div class="more-info"> 
+            <b>Cuisines:</b> {{cuisines}}
+            <br>
+            <b>Cost For 2:</b> \${{average_cost_for_two}}</p> 
+        </div>   
         <div class="menu">
-            <a href="{{menu_url}}">Menu</a>
+            <a href="{{menu_url}}" target="_blank">Menu</a>
         </div>
-
     </div>
-
-    <hr>
+<hr>
     `
     const template = Handlebars.compile(markup)
 
@@ -51,6 +50,69 @@ var app = app || {};
             renderThings()
         });
         $('#list-view').show()
+        
+
+//Back to Top Button
+window.onscroll = function() {
+    scrollFunction();
+  };
+  function scrollFunction() {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+      document.getElementById("myBtn").style.display = "block";
+    } else {
+      document.getElementById("myBtn").style.display = "none";
+    }
+  }
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    if (window.scrollY != 0) {
+      setTimeout(function() {
+        window.scrollTo(0, window.scrollY - 900);
+        topFunction();
+      }, 40);
+    }
+  }
+
+  //Search box
+  $(document).ready(function(){
+    var submitIcon = $('.searchbox-icon');
+    var inputBox = $('.searchbox-input');
+    var searchBox = $('.searchbox');
+    var isOpen = false;
+    submitIcon.click(function(){
+        if(isOpen == false){
+            searchBox.addClass('searchbox-open');
+            inputBox.focus();
+            isOpen = true;
+        } else {
+            searchBox.removeClass('searchbox-open');
+            inputBox.focusout();
+            isOpen = false;
+        }
+    });  
+     submitIcon.mouseup(function(){
+            return false;
+        });
+    searchBox.mouseup(function(){
+            return false;
+        });
+    $(document).mouseup(function(){
+            if(isOpen == true){
+                $('.searchbox-icon').css('display','block');
+                submitIcon.click();
+            }
+        });
+});
+    function buttonUp(){
+        var inputVal = $('.searchbox-input').val();
+        inputVal = $.trim(inputVal).length;
+        if( inputVal !== 0){
+            $('.searchbox-icon').css('display','none');
+        } else {
+            $('.searchbox-input').val('');
+            $('.searchbox-icon').css('display','block');
+        }
+    }
     }
     module.ListView = ListView
 })(app)

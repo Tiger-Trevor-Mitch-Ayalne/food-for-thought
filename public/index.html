@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="./styles/icons.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/4d1350745c/UntitledProject/style.css">
+
+    <script>
+            $(document).ready(function(){
+                $(".menu-btn").click(function(event){
+                  event.preventDefault();
+                  $("nav").toggleClass("menushow");
+                });
+              });
+              function initMap() {
+            var resLat = app.NearbyRes.res_id.latitude * 1
+            var resLon = app.NearbyRes.res_id.longitude * 1
+            var uluru = {lat: resLat, lng: resLon};
+            var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: uluru
+            });
+            var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+            });
+        }
+            </script>
     <title>Grub Here</title>
 
       <style>
@@ -17,6 +40,34 @@
         </style>
 </head>
 <body>
+        <nav id="top-nav">
+                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                    <span class="icon-pacman"></span>
+                    <div id="title">Chow Down</div>
+                    <div class="container">
+                            <form class="searchbox">
+                                <input type="search" id="zip" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                                <input type="submit" id="searchByZIP" class="searchbox-submit" value="GO">
+                                <span class="searchbox-icon" class="icon-search">&#x1f50d;</span>
+                            </form>
+                        </div>
+
+        </nav>
+        <nav id="filter-nav">
+                <div class="menu-btn">
+                    <a href="#">+</a>
+                </div>
+                <h1>Filter By</h1>
+                
+                    <h3><a href="#">Cuisines</a></h3>
+                    <h3></h3><a href="#">Price</a></h3>
+                    <h3></h3><a href="#">Delivery</a></h3>
+                
+</nav>
+
+<button onclick="topFunction()" id="myBtn">
+<span class="icon-circle-up"></span>
+</button>
     <div id="main-menu-view" class="menu">
         <div id="main-menu-slot"></div>
     </div>
@@ -103,7 +154,9 @@
             })
             .catch(function(err){ console.error(err)});
         });
+        
     });
+    
     </script>
 </body>
 </html>
