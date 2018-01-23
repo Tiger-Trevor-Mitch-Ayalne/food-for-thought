@@ -4,41 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JASON TEST DATA</title>
-    <script id="coords-template" type="text/x-handlebars-template">
-        <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
-      </script>
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/icons.css">
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <title>Grub Here</title>
 
+      <style>
+        ul#simple-nav-menu li {
+            display:inline;
+        }
+        </style>
 </head>
 <body>
-    <div id="coords"></div>
+    <div id="main-menu-view" class="menu">
+        <div id="main-menu-slot"></div>
+    </div>
+    <div id="top-header-view" class="page">
+        <div id="top-header-slot"></div>
+    </div>
+    <div id="side-nav-view" class="page">
+        <div id="side-nav-slot">
+        </div>
+        <ul id="sideNavUL"></ul>
+    </div>
+    <form>
+        <input type="text" id="zip">
+        <button type="submit" id="searchByZIP">Search</button>
+    </form>
+    <div id="detail-view" class="page">
+        <div id="detail-slot"></div>
+    </div>
+    <div id="reviews-view" class="page">
+        <div id="reviews-slot"></div>
+    </div>
+    <div id="list-view" class="page">
+        <div id="list-slot"></div>
+    </div>
+    <div id="admin-view" class="page">
+        <div id="admin-slot"></div>
+    </div>
+    <div id="user-view" class="page">
+        <div id="user-slot"></div>
+    </div>
+    <div id="register-view" class="page">
+        <div id="register-slot"></div>
+    </div>
+    <div id="about-us-view" class="page">
+        <div id="about-us-slot"></div>
+    </div>
+    <div id="contact-us-view" class="page">
+        <div id="contact-us-slot"></div>
+    </div>
+    <div id="login-view" class="page">
+        <div id="login-slot"></div>
+    </div>
+    <div id="error-view" class="page">
+        <div id="error-slot"></div>
+    </div>
 
+    <div id="restaurants-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="scripts/models/rst.js"></script>
-        <script>
-            var est = '',
-                userCoord = '';
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log('position.coords.latitude',position.coords.latitude,'position.coords.longitude',position.coords.longitude);
-              userCoord = {
-                  long: position.coords.longitude,
-                  lat: position.coords.latitude
-              }
-              console.log('userCoord lat',userCoord.lat,'userCoord long',userCoord.long);
-              $.post('http://localhost:3000/api/v2.1/geocode',userCoord)
-                .then(function(data){
-                    var res = JSON.parse(data)
-                    Neighborhood.all = new Neighborhood(res.location);
-                    Popularity.all = new Popularity(res.popularity.top_cuisines)
-                    NearbyRes.all = new NearbyRes(res.nearby_restaurants)
-
-                    console.log(est.location)
-                })
-                .catch(function(err){ console.error(err)});
-            });
-          </script>
+    
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+    <script src="scripts/models/Restaurant.js"></script>
+    <script src="scripts/views/list-view.js"></script>
+    <script src="scripts/views/detail-view.js"></script>
+    <script src="scripts/views/admin-view.js"></script>
+    <script src="scripts/views/navigation/main-menu-view.js"></script>
+    <script src="scripts/views/navigation/side-nav-view.js"></script>
+    <script src="scripts/views/navigation/top-header-view.js"></script>
+    <script src="scripts/views/about-us-view.js"></script>
+    <script src="scripts/views/contact-us-view.js"></script>
+    <script src="scripts/views/login-view.js"></script>
+    <script src="scripts/views/user-view.js"></script>
+    <script src="scripts/views/register-view.js"></script>
+    <script src="scripts/views/reviews-view.js"></script>
+    <script src="scripts/views/error-view.js"></script>
+    <script src="scripts/controllers/routes.js"></script>
+    <script>
+     var zipData;
+    $(function(){
+        $('#searchByZIP').on('click',function(e){
+            e.preventDefault()
+            var zip = $('#zip').val();
+            console.log($('#zip').val())
+            $.get('http://api.zippopotam.us/us/'+zip)
+            .then((data)=>{
+                zipData = {
+                    zip:data['post code'],
+                    long:data.places[0].latitude,
+                    lat:data.places[0].longitude
+                }
+                localStorage.setItem('zipData',JSON.stringify(zipData));
+            })
+            .catch(function(err){ console.error(err)});
+        });
+    });
+    </script>
 </body>
 </html>
