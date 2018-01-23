@@ -65,6 +65,9 @@ var app = app || {};
     module.ListView = ListView
 })(app)
 
+
+
+
 //Back to Top Button
 window.onscroll = function() {
     scrollFunction();

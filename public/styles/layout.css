@@ -20,6 +20,7 @@ h1{
     right:0;
     position: fixed;
     border-radius: 0px;
+    z-index: 1;
 
 }
 #title {
@@ -51,6 +52,12 @@ h1{
     position: relative;
     font-size:12px;
     border-radius:10px;
+    overflow: hidden;
+}
+.rst-top-level:hover {
+    transition: all .2s ease-in-out;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 5px blue;
 }
 
 .img-info {
