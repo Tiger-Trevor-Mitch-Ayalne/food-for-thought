@@ -8,24 +8,59 @@
     <link rel="stylesheet" href="./styles/icons.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
-    <title>JASON TEST DATA</title>
-      <script id="restaurants-template" type="text/x-handlebars-template">
-       
-        
-      </script>
+    <title>Grub Here</title>
+
+      <style>
+        ul#simple-nav-menu li {
+            display:inline;
+        }
+        </style>
 </head>
 <body>
+    <div id="main-menu-view" class="menu">
+        <div id="main-menu-slot"></div>
+    </div>
+    <div id="top-header-view" class="page">
+        <div id="top-header-slot"></div>
+    </div>
+    <div id="side-nav-view" class="page">
+        <div id="side-nav-slot">
+        </div>
+        <ul id="sideNavUL"></ul>
+    </div>
     <form>
         <input type="text" id="zip">
         <button type="submit" id="searchByZIP">Search</button>
     </form>
     <div id="detail-view" class="page">
-        <h1>Detail View</h1>
         <div id="detail-slot"></div>
     </div>
+    <div id="reviews-view" class="page">
+        <div id="reviews-slot"></div>
+    </div>
     <div id="list-view" class="page">
-        <h1>List View</h1>
         <div id="list-slot"></div>
+    </div>
+    <div id="admin-view" class="page">
+        <div id="admin-slot"></div>
+    </div>
+    <div id="user-view" class="page">
+        <div id="user-slot"></div>
+    </div>
+    <div id="register-view" class="page">
+        <div id="register-slot"></div>
+    </div>
+    <div id="about-us-view" class="page">
+        <div id="about-us-slot"></div>
+    </div>
+    <div id="contact-us-view" class="page">
+        <div id="contact-us-slot"></div>
+    </div>
+    <div id="login-view" class="page">
+        <div id="login-slot"></div>
+    </div>
+    <div id="error-view" class="page">
+        <div id="error-slot"></div>
     </div>
 
     <div id="restaurants-container"></div>
@@ -35,10 +70,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
-    <script src="scripts/models/rst.js"></script>
+    <script src="scripts/models/Restaurant.js"></script>
     <script src="scripts/views/list-view.js"></script>
     <script src="scripts/views/detail-view.js"></script>
     <script src="scripts/views/admin-view.js"></script>
+    <script src="scripts/views/navigation/main-menu-view.js"></script>
+    <script src="scripts/views/navigation/side-nav-view.js"></script>
+    <script src="scripts/views/navigation/top-header-view.js"></script>
+    <script src="scripts/views/about-us-view.js"></script>
+    <script src="scripts/views/contact-us-view.js"></script>
+    <script src="scripts/views/login-view.js"></script>
+    <script src="scripts/views/user-view.js"></script>
+    <script src="scripts/views/register-view.js"></script>
+    <script src="scripts/views/reviews-view.js"></script>
     <script src="scripts/views/error-view.js"></script>
     <script src="scripts/controllers/routes.js"></script>
     <script>
