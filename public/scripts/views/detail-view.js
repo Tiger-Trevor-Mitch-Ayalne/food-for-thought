@@ -33,6 +33,7 @@ var app = app || {};
 
         </div>
 
+        <div id="googleMap" style="width:70%;height:300px;"></div>
         <hr>
     `
     const template = Handlebars.compile(markup)
@@ -41,12 +42,12 @@ var app = app || {};
         $('#detail-slot').append((template(app.NearbyRes.res_id)))
     }
     DetailView.init = (id) => {
-        console.log('id inside detail',id)
+        console.log(app.NearbyRes.res_id.latitude,app.NearbyRes.res_id.longitude)
         $('#detail-view').off()
         $('#detail-slot').empty()
-
         renderThings(id)
         $('#detail-view').show()
+        
     }
     module.DetailView = DetailView
 })(app)

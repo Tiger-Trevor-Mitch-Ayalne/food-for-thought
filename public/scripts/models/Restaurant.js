@@ -155,34 +155,34 @@ NearbyRes.fetchOne = (id,callback) =>{
             NearbyRes.res_id = NearbyRes.all[index];
         }
     }
-    $.get('http://localhost:3000/api/v2.1/reviews',res_id)
-        .then(function(reviews){
-        var parsed_reviews = JSON.parse(reviews);
-        for(i in parsed_reviews.user_reviews){console.log(parsed_reviews.user_reviews[i])}
-            for(index in parsed_reviews.user_reviews){
-                    Reviews.all.push(new Reviews(
-                        parsed_reviews.user_reviews[index].review.comments_count,
-                        parsed_reviews.user_reviews[index].review.id,
-                        parsed_reviews.user_reviews[index].review.likes,
-                        parsed_reviews.user_reviews[index].review.rating,
-                        parsed_reviews.user_reviews[index].review.rating_color,
-                        parsed_reviews.user_reviews[index].review.rating_text,
-                        parsed_reviews.user_reviews[index].review.review_text,
-                        parsed_reviews.user_reviews[index].review.review_time_friendly,
-                        parsed_reviews.user_reviews[index].review.timestamp,
-                        parsed_reviews.user_reviews[index].review.user.foodie_color,
-                        parsed_reviews.user_reviews[index].review.user.foodie_level,
-                        parsed_reviews.user_reviews[index].review.user.foodie_level_num,
-                        parsed_reviews.user_reviews[index].review.user.name,
-                        parsed_reviews.user_reviews[index].review.user.profile_deeplink,
-                        parsed_reviews.user_reviews[index].review.user.profile_image,
-                        parsed_reviews.user_reviews[index].review.user.profile_url,
-                    ));
-            }
+    // $.get('http://localhost:3000/api/v2.1/reviews',res_id)
+    //     .then(function(reviews){
+    //     var parsed_reviews = JSON.parse(reviews);
+    //     for(i in parsed_reviews.user_reviews){console.log(parsed_reviews.user_reviews[i])}
+    //         for(index in parsed_reviews.user_reviews){
+    //                 Reviews.all.push(new Reviews(
+    //                     parsed_reviews.user_reviews[index].review.comments_count,
+    //                     parsed_reviews.user_reviews[index].review.id,
+    //                     parsed_reviews.user_reviews[index].review.likes,
+    //                     parsed_reviews.user_reviews[index].review.rating,
+    //                     parsed_reviews.user_reviews[index].review.rating_color,
+    //                     parsed_reviews.user_reviews[index].review.rating_text,
+    //                     parsed_reviews.user_reviews[index].review.review_text,
+    //                     parsed_reviews.user_reviews[index].review.review_time_friendly,
+    //                     parsed_reviews.user_reviews[index].review.timestamp,
+    //                     parsed_reviews.user_reviews[index].review.user.foodie_color,
+    //                     parsed_reviews.user_reviews[index].review.user.foodie_level,
+    //                     parsed_reviews.user_reviews[index].review.user.foodie_level_num,
+    //                     parsed_reviews.user_reviews[index].review.user.name,
+    //                     parsed_reviews.user_reviews[index].review.user.profile_deeplink,
+    //                     parsed_reviews.user_reviews[index].review.user.profile_image,
+    //                     parsed_reviews.user_reviews[index].review.user.profile_url,
+    //                 ));
+    //         }
             
-            app.ReviewsView.init()
-/************
- * PLEASE NOTE =====> THIS IS FOR BLOCKED URL @ AYANLE'S WORK
+    //         app.ReviewsView.init()
+//************
+ //* PLEASE NOTE =====> THIS IS FOR BLOCKED URL @ AYANLE'S WORK
         console.log('ERROR with API. Work-around initiated')
         $.get('http://localhost:3000/scripts/sampleReviews.json')
         .then(function(reviewsTestData){
@@ -214,11 +214,11 @@ NearbyRes.fetchOne = (id,callback) =>{
         .catch(function(err){
             console.log('FILE: ERROR with sampleReviews.json',err)
         });
-********/            
-        })
-        .catch(function(err){
-            console.error(err)
-        })
+//********/            
+        // })
+        // .catch(function(err){
+        //     console.error(err)
+        // })
 }
 Admin.fetchUsers = () =>{
     var existingUser = localStorage.getItem('userAccount');
