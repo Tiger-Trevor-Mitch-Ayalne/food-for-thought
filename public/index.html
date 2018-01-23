@@ -70,6 +70,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+  
+
     <script src="scripts/models/Restaurant.js"></script>
     <script src="scripts/views/list-view.js"></script>
     <script src="scripts/views/detail-view.js"></script>
@@ -104,6 +106,23 @@
             .catch(function(err){ console.error(err)});
         });
     });
+    
     </script>
+        <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXzw_66pIoJMRo1Am2TpNyN0XaIl-0QKY&callback=googleMap">
+</script>
+<script>
+    function googleMap() {
+        var gMapslong = app.NearbyRes.res_id.longitude * 1;
+        var gMapslat = app.NearbyRes.res_id.latitude * 1;
+        console.log('gMapslat',gMapslat,'gMapslong',gMapslong)
+        var myCenter = new google.maps.LatLng(gMapslat,gMapslong);
+        var mapCanvas = document.getElementById("googleMap");
+        var mapOptions = {center: myCenter, zoom: 14};
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({position:myCenter});
+        marker.setMap(map);
+        }
+</script>
 </body>
 </html>
