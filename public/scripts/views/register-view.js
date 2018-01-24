@@ -5,9 +5,9 @@ var app = app || {};
 
     const markup = `
         <h1 id="RegisterUser">
-            Register as a user on Grub Here. 
+            Register as a user on Grub 'round Here. 
         </h1>
-        <p id="whyRegister"> This will allow you to save restaurants. </p>
+        <p id="whyRegister"> (This will allow you to save restaurants) </p>
         <form id="userRegForm">
             <input type="text" id="name_regForm" placeholder="User ID" required>
             <input type="email" id="email_regForm" placeholder="Your Email" required>
@@ -35,7 +35,6 @@ var app = app || {};
             e.preventDefault()
             
             if(
-                $('#name_regForm').val() !="" ||
                 $('#email_regForm').val() !="" ||
                 $('#password_regForm').val() !=""
             ){
