@@ -21,3 +21,8 @@ Build out how to save a Restaurant and how to pull up the list of saved Restaura
 
 
 Add CommentCollaps
+
+.location 
+
+document.element.append.innerhtml.()
+div = {{ }}
