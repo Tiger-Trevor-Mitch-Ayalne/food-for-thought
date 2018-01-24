@@ -16,6 +16,7 @@ page('/detail-view/:id', (ctx) =>{
         app.DetailView.init(ctx.params.id);
         app.TopHeaderView.init()
         app.SideNavView.init()
+        googleMap()
 
 })
 page('/login-view', app.LoginView.init)

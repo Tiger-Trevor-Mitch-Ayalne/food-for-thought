@@ -182,7 +182,7 @@ NearbyRes.fetchOne = (id,callback) =>{
             
             app.ReviewsView.init()
 /************
- * PLEASE NOTE =====> THIS IS FOR BLOCKED URL @ AYANLE'S WORK
+ //* PLEASE NOTE =====> THIS IS FOR BLOCKED URL @ AYANLE'S WORK
         console.log('ERROR with API. Work-around initiated')
         $.get('http://localhost:3000/scripts/sampleReviews.json')
         .then(function(reviewsTestData){
