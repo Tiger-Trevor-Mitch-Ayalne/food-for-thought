@@ -7,9 +7,11 @@ var app = app || {};
         <h1 id="RegisterUser">
             Register as a user on Grub 'round Here. 
         </h1>
-        <p id="whyRegister"> (This will allow you to save restaurants) </p>
-        <form id="userRegForm">
-            <input type="text" id="name_regForm" placeholder="User ID" required>
+
+        <form id="userRegForm"
+        method="post" action="/user">
+<p id="whyRegister"> (This will allow you to save restaurants) </p>
+            <input type="text" id="name_regForm" placeholder="Your Name" required>
             <input type="email" id="email_regForm" placeholder="Your Email" required>
             <input type="password" id="password_regForm" placeholder="Create Password" required>
             <button type="submit" id="register">Register</button>
@@ -31,9 +33,10 @@ var app = app || {};
         $('#register-view').show()
         $('#userRegForm').off()
         // handle UserForm
+ 
         $('#register').on('click',function(e){
             e.preventDefault()
-            
+    
             if(
                 $('#email_regForm').val() !="" ||
                 $('#password_regForm').val() !=""
@@ -43,12 +46,16 @@ var app = app || {};
                     email: $('#email_regForm').val(),
                     password: $('#password_regForm').val()
                 }
-                var userHolder = [];
-                var userStings = localStorage.getItem('userAccount');
-                var allUserAccounts = JSON.parse(userStings);
-                userHolder.push(allUserAccounts);
-                userHolder.push(NewUserAccount);
-                localStorage.setItem('userAccount', JSON.stringify(userHolder));
+                
+                // NewUserAccount = JSON.stringify(NewUserAccount)
+                console.log(NewUserAccount)
+                    $.post('/user',NewUserAccount)
+                      .then(data => {
+                        console.log(data);
+                        if (callback) callback();
+                    
+                      });
+
                 $('#userRegForm').fadeOut( "slow");
             }
             else{
