@@ -7,7 +7,8 @@ var app = app || {};
         <h1>
             Register View
         </h1>
-        <form id="userRegForm">
+        <form id="userRegForm"
+        method="post" action="/user">
             <input type="text" id="name_regForm" placeholder="Your Name" required>
             <input type="email" id="email_regForm" placeholder="Your Email" required>
             <input type="password" id="password_regForm" placeholder="Create Password" required>
@@ -28,9 +29,10 @@ var app = app || {};
         $('#register-view').show()
         $('#userRegForm').off()
         // handle UserForm
+ 
         $('#register').on('click',function(e){
             e.preventDefault()
-            
+    
             if(
                 $('#name_regForm').val() !="" ||
                 $('#email_regForm').val() !="" ||
@@ -41,12 +43,16 @@ var app = app || {};
                     email: $('#email_regForm').val(),
                     password: $('#password_regForm').val()
                 }
-                var userHolder = [];
-                var userStings = localStorage.getItem('userAccount');
-                var allUserAccounts = JSON.parse(userStings);
-                userHolder.push(allUserAccounts);
-                userHolder.push(NewUserAccount);
-                localStorage.setItem('userAccount', JSON.stringify(userHolder));
+                
+                // NewUserAccount = JSON.stringify(NewUserAccount)
+                console.log(NewUserAccount)
+                    $.post('/user',NewUserAccount)
+                      .then(data => {
+                        console.log(data);
+                        if (callback) callback();
+                    
+                      });
+
                 $('#userRegForm').fadeOut( "slow");
             }
             else{
