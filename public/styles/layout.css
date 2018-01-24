@@ -56,7 +56,14 @@
     right: 4px;
     top: 6px;
 } 
-    
+
+#whyRegister {
+    margin-top: 0px;
+}
+#RegisterUser {
+    margin-bottom: 0px;
+}
+
 
 /* <div id="rst-top-level">
 <div id="img-info">
