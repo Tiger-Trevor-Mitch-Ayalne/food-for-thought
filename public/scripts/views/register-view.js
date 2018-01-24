@@ -4,11 +4,13 @@ var app = app || {};
     const RegisterView = {};
 
     const markup = `
-        <h1>
-            Register View
+        <h1 id="RegisterUser">
+            Register as a user on Grub 'round Here. 
         </h1>
+
         <form id="userRegForm"
         method="post" action="/user">
+<p id="whyRegister"> (This will allow you to save restaurants) </p>
             <input type="text" id="name_regForm" placeholder="Your Name" required>
             <input type="email" id="email_regForm" placeholder="Your Email" required>
             <input type="password" id="password_regForm" placeholder="Create Password" required>
@@ -24,6 +26,8 @@ var app = app || {};
         $('#register-slot').append(template())
     }
     RegisterView.init = () => {
+        $('#zip').hide()
+        $('#searchByZIP').hide()
         $('#register-view').off()
         renderThings()
         $('#register-view').show()
@@ -34,7 +38,6 @@ var app = app || {};
             e.preventDefault()
     
             if(
-                $('#name_regForm').val() !="" ||
                 $('#email_regForm').val() !="" ||
                 $('#password_regForm').val() !=""
             ){
