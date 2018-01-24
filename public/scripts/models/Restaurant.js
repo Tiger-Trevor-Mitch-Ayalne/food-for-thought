@@ -220,6 +220,7 @@ NearbyRes.fetchOne = (id,callback) =>{
             console.error(err)
         })
 }
+
 Admin.fetchUsers = () =>{
     var existingUser = localStorage.getItem('userAccount');
     console.log('existingUser',existingUser)
