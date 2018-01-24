@@ -9,6 +9,7 @@ page('/', ()=>{
     app.ListView.init()
     app.TopHeaderView.init()
     app.SideNavView.init()
+    
 })
 
 page('/detail-view/:id', (ctx) =>{
