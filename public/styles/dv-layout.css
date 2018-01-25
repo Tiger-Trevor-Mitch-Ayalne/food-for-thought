@@ -1,0 +1,33 @@
+
+
+#googleMap{
+    border:2px;
+    border-style: solid;
+    ;
+    margin:auto;
+
+}
+
+.reviews{
+    overflow:auto;
+}
+#rvw-name{
+    font-weight: bold;
+}
+#rvw-img{
+    height:20%;
+    width:20%;
+    float:left;
+}
+#rvw-rating{   
+    display:inline-block;
+    color:white;
+    float:left; 
+    clear:both;
+}
+#rvw-date{
+    clear:both;
+}
+#rvw-text{
+
+}
