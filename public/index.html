@@ -113,6 +113,9 @@
     <script>
      var zipData;
     $(function(){
+        $("#fave").on('click',function(){
+            console.log($(this).attr('data-res_id'));
+        })
         $('#searchByZIP').on('click',function(e){
             e.preventDefault()
             var zip = $('#zip').val();
@@ -138,7 +141,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXzw_66pIoJMRo1Am2TpNyN0X
     function googleMap() {
         var gMapslong = app.NearbyRes.res_id.longitude * 1;
         var gMapslat = app.NearbyRes.res_id.latitude * 1;
-        console.log('gMapslat',gMapslat,'gMapslong',gMapslong)
         var myCenter = new google.maps.LatLng(gMapslat,gMapslong);
         var mapCanvas = document.getElementById("googleMap");
         var mapOptions = {center: myCenter, zoom: 14};

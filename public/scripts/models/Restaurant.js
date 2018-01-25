@@ -220,7 +220,16 @@ NearbyRes.fetchOne = (id,callback) =>{
             console.error(err)
         })
 }
-
+NearbyRes.faveIt = (id) =>{
+    var res_id = {
+        id:id
+    };
+    for(index in NearbyRes.all){
+        if(id == NearbyRes.all[index].id){
+            NearbyRes.faveIt = NearbyRes.all[index];
+        }
+    }
+}
 Admin.fetchUsers = () =>{
     var existingUser = localStorage.getItem('userAccount');
     console.log('existingUser',existingUser)
