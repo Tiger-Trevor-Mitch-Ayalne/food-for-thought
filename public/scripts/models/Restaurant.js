@@ -6,12 +6,11 @@ Admin.all = [];
 UserLocation.all = [];
 Topcuisines.all = [];
 NearbyRes.all = [];
+NearbyRes.user_favorites = [];
 Reviews.all = [];
 
 function Admin(user){
-    this.name = user.name;
-    this.email = user.email;
-    this.password = user.password;
+    Object.keys(user).forEach(key => this[key] = user[key]);
 }
 // location
 function UserLocation(title, city_id, latitude, longitude, city_name){
@@ -84,74 +83,126 @@ function Reviews(
     this.profile_image = profile_image
     this.profile_url = profile_url
 }
-NearbyRes.fetchAll = (callback) =>{
-        navigator.geolocation.getCurrentPosition(function(position) {
-            console.log('position',position)
-            var userCoord = {
-                long: position.coords.longitude,
-                lat: position.coords.latitude
+NearbyRes.fetchAll = (callback) => {
+    navigator.geolocation.watchPosition(function(position) {
+        var zipData;
+        if(localStorage.zipData == undefined){
+              zipData = {
+                latitude:position.coords.latitude,
+                longitude:position.coords.longitude,
+                city_name:""
             }
-            console.log('http://localhost:3000/api/v2.1/geocode',userCoord)
-            $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
-            .then(function(data){
+              console.log('Permission ACCEPTED','SET: zipData',zipData)
+              localStorage.setItem('zipData', JSON.stringify(zipData))
+        }
+        alert('line 98')
+        $.get('http://localhost:3000/api/v2.1/geocode', zipData)
+          .then(function(data) {
+            alert('line 101')
+            var res = JSON.parse(data)
+            for (index in res.nearby_restaurants) {
+              NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+            }
+            zipData = {
+                latitude:res.location.latitude,
+                longitude:res.location.longitude,
+                city_name:res.location.city_name
+            }
+            localStorage.setItem('zipData', JSON.stringify(zipData))
+            Topcuisines.all.push(new Topcuisines(
+              testData.popularity.top_cuisines
+            ));
+            app.TopHeaderView.init()
+            app.SideNavView.init()
+          }).then(() => {
+  
+            callback()
+          })
+          .catch(function(err) {
+            /*
+            in the event of error, load test data. This is a work-around to deal with Zomato IP block at Ayanle's office network :)
+            */
+            alert('line 125')
+            $.get('http://localhost:3000/scripts/sampleNearByRes.json')
+              .then(function(testData) {
+                // for (index in testData.nearby_restaurants) {
+                //   NearbyRes.all.push(new NearbyRes(testData.nearby_restaurants[index].restaurant))
+                // }
+                // zipData = {
+                //     latitude:testData.location.latitude,
+                //     longitude:testData.location.longitude,
+                //     city_name:testData.location.city_name
+                // }
+                // localStorage.setItem('zipData', JSON.stringify(zipData))
+                // Topcuisines.all.push(new Topcuisines(
+                //   testData.popularity.top_cuisines
+                // ));
+                // app.TopHeaderView.init()
+                // app.SideNavView.init()
+              }).then(() => {
+                callback()
+              })
+              //console.error(err)
+          });
+      },
+      /*****/
+      // Start of zip look-up
+      /*****/
+      function(error) {
+        if (error.code == error.PERMISSION_DENIED) {
+            alert('line 153')
+          console.log('Permission DENIED');
+          if (localStorage.zipData == undefined) {
+            alert('zipData is MISSING')
+            app.ZipSearchView.init()
+          }
+          else{
+            var zip = localStorage.getItem('zipData');
+            var zipGeo = JSON.parse(zip)
+            console.log('zipGeo', zipGeo)
+            $.get('http://localhost:3000/api/v2.1/geocode', zipGeo)
+              .then(function(data) {
+                  alert('line 164')
                 var res = JSON.parse(data)
-                for(index in res.nearby_restaurants){
-                    NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
+                for (index in res.nearby_restaurants) {
+                  NearbyRes.all.push(new NearbyRes(res.nearby_restaurants[index].restaurant))
                 }
                 UserLocation.all.push(new UserLocation(
-                    res.location.title, 
-                    res.location.city_id, 
-                    res.location.latitude, 
-                    res.location.longitude, 
-                    res.location.city_name
+                  res.location['place name'],
+                  "0",
+                  res.location.latitude,
+                  res.location.longitude,
+                  res.location['place name']
                 ));
                 Topcuisines.all.push(new Topcuisines(
-                    testData.popularity.top_cuisines
+                  testData.popularity.top_cuisines
                 ));
                 app.TopHeaderView.init()
                 app.SideNavView.init()
-            }).then(()=>{
-                
+              }).then(() => {
+    
                 callback()
-            })
-            .catch(function(err){ 
-                /*
-                in the event of error, load test data
-
-                This is a work-around to deal 
-                with Zomato IP block at 
-                Ayanle's office network :)
-                */
-                $.get('http://localhost:3000/scripts/sampleNearByRes.json')
-                .then(function(testData){
-                    for(index in testData.nearby_restaurants){
-                        NearbyRes.all.push(new NearbyRes(testData.nearby_restaurants[index].restaurant))
-                    }
-                    UserLocation.all.push(new UserLocation(
-                        testData.location.title, 
-                        testData.location.city_id, 
-                        testData.location.latitude, 
-                        testData.location.longitude, 
-                        testData.location.city_name
-                    ));
-                    Topcuisines.all.push(new Topcuisines(
-                        testData.popularity.top_cuisines
-                    ));
-                    app.TopHeaderView.init()
-                    app.SideNavView.init()
-                }).then(()=>{
-                    callback()
-                })
-                //console.error(err)
-            });
-        })
-    }
+              })
+              .catch(function(err) {
+                  alert('line 183')
+                
+                  callback()
+              });
+          }
+          
+        }
+      });
+  }
+  
+  
+  
 NearbyRes.fetchOne = (id,callback) =>{
     var res_id = {
         id:id
     };
     for(index in NearbyRes.all){
         if(id == NearbyRes.all[index].id){
+            console.log('NearbyRes.all[index]',NearbyRes.all[index])
             NearbyRes.res_id = NearbyRes.all[index];
         }
     }
@@ -226,15 +277,51 @@ NearbyRes.faveIt = (id) =>{
     };
     for(index in NearbyRes.all){
         if(id == NearbyRes.all[index].id){
-            NearbyRes.faveIt = NearbyRes.all[index];
+            NearbyRes.fave = NearbyRes.all[index];
+            console.log('NearbyRes.faveIt',NearbyRes.fave)
+            $.post('/faves',NearbyRes.fave)
+                .then(data => {
+                console.log(data);
+                if (callback) callback();
+        
+            });
         }
     }
 }
+NearbyRes.deletefaveIt = (id) =>{
+    $.ajax({
+        url: '/faves/'+id,
+        method: 'DELETE'
+      })
+    .then(data => {
+        console.log(data);
+        if (callback) callback();
+    });
+}
+NearbyRes.getFaves = (callback,callback2) =>{
+    //TO DO: load faves by user
+    $.get('/allfaves')
+        .then(data => {
+            NearbyRes.user_favorites = data;
+        console.log(data);
+        if (callback) callback();
+        if (callback2) callback2();
+
+    });
+}
 Admin.fetchUsers = () =>{
-    var existingUser = localStorage.getItem('userAccount');
-    console.log('existingUser',existingUser)
-    var parsedUsers = JSON.parse(existingUser);
-    Admin.all.push(new Admin(parsedUsers))
+    alert('fetching users')
+    $.ajax({
+        url: 'http://localhost:3000/users',
+        method: 'get'
+      })
+    .then(data => {
+        var parseData = JSON.parse(data);
+            console.log('parseData',parseData)
+            //Admin.all.push(new Admin(parseData))
+            localStorage.setItem('parseUserData',parseData)
+        if (callback) callback();
+    });
 }
     module.Admin = Admin;
     module.NearbyRes = NearbyRes;

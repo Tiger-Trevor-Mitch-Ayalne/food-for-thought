@@ -29,6 +29,7 @@ var app = app || {};
 
             <div class="menu">
                 <a href="{{menu_url}}">Menu</a>
+                <a data-res_id="{{id}}" id="fave-detail" style="position: absolute; right: 20px;">save</a>
             </div>
 
         </div>
@@ -40,6 +41,7 @@ var app = app || {};
 
     function renderThings(res_id) {
         $('#detail-slot').append((template(app.NearbyRes.res_id)))
+        googleMap()
     }
     DetailView.init = (id) => {
         console.log(app.NearbyRes.res_id.latitude,app.NearbyRes.res_id.longitude)
@@ -48,6 +50,13 @@ var app = app || {};
         renderThings(id)
         $('#detail-view').show()
         
+            
+        $("#fave-detail").on('click',function(){
+            console.log('fave-detail clicked')
+            var faveIt = $(this).attr('data-res_id');
+            app.NearbyRes.faveIt(faveIt);
+            console.log($(this).attr('data-res_id'));
+        })
     }
     module.DetailView = DetailView
 })(app)
