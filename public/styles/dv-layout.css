@@ -10,6 +10,7 @@
 
 .reviews{
     overflow:auto;
+    padding:20px;
 }
 #rvw-name{
     font-weight: bold;
@@ -42,6 +43,6 @@
     float:right;
 }
 #ham-search{
-        width: 80px;
-        color:black;
+    width:80px;
+    color:black;
 }

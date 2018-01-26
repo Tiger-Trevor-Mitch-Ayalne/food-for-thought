@@ -431,7 +431,7 @@ th {
   color:white;
    text-decoration: none;
 }
-a:-webkit-any-link {
+#home:-webkit-any-link {
   cursor: pointer;
   text-decoration: none;
 }
