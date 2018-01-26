@@ -17,8 +17,28 @@
 </head>
 
 <body>
+        <div id="hamburger">
+            <div id = "menu-button">
+                <div id="line-1"></div>
+                <div id="line-2"></div>
+                <div id="line-3"></div>
+               </div>
+
+               <ul id="menu">
+                    <li data-nav_id="home" style="color:white; text-decoration: none;"><a href="/">Home</a></li>
+                    <li data-nav_id="about"><a href="/about-us-view">About Us</a></li>
+                    <li data-nav_id="contact"><a href="/contact-us-view">Contact Us</a></li>
+                    <li data-nav_id="register"><a href="/register-view">Register</a></li>
+                    <li data-nav_id="login"><a href="/login-view">Login</a></li>
+                    <li data-nav_id="admin"><a href="/admin-view">Admin</a></li>
+                </ul>
+                </div>
+
+
     <div id="main-menu-view" class="menu">
-        <div id="main-menu-slot"></div>
+        <div id="main-menu-slot"> 
+            
+        </div>
     </div>
     <div id="top-header-view" class="page">
         <div id="top-header-slot"></div>
@@ -130,6 +150,15 @@
             });
             marker.setMap(map);
         }
+    </script>
+    <script>
+        $("#menu-button").click(function(){
+ $(this).toggleClass("active");
+ $("#line-1").toggleClass("active");
+ $("#line-2").toggleClass("active");
+ $("#line-3").toggleClass("active");
+ $("#menu").slideToggle("slow");
+});
     </script>
 </body>
 
