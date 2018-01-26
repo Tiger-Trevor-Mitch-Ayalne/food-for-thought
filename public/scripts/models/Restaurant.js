@@ -29,7 +29,7 @@ function Topcuisines(top_cuisines){
 function NearbyRes(data){
     this.average_cost_for_two = data.average_cost_for_two;
     this.cuisines = data.cuisines;
-    this.featured_image = data.featured_image;
+    this.featured_image = data.featured_image === "" ? "http://clk.com.au/img/no-photo.jpg" : data.featured_image;
     this.has_online_delivery = data.has_online_delivery;
     this.has_table_booking = data.has_table_booking;
     this.id = data.id;
@@ -91,8 +91,8 @@ NearbyRes.fetchAll = (callback) =>{
                 long: position.coords.longitude,
                 lat: position.coords.latitude
             }
-            console.log('http://localhost:3000/api/v2.1/geocode',userCoord)
-            $.get('http://localhost:3000/api/v2.1/geocode',userCoord)
+            // console.log('http://localhost:3000/api/v2.1/geocode',userCoord)
+            $.get('http://localhost:8000/api/v2.1/geocode',userCoord)
             .then(function(data){
                 var res = JSON.parse(data)
                 for(index in res.nearby_restaurants){
@@ -122,7 +122,7 @@ NearbyRes.fetchAll = (callback) =>{
                 with Zomato IP block at 
                 Ayanle's office network :)
                 */
-                $.get('http://localhost:3000/scripts/sampleNearByRes.json')
+                $.get('http://localhost:8000/scripts/sampleNearByRes.json')
                 .then(function(testData){
                     for(index in testData.nearby_restaurants){
                         NearbyRes.all.push(new NearbyRes(testData.nearby_restaurants[index].restaurant))
@@ -155,7 +155,7 @@ NearbyRes.fetchOne = (id,callback) =>{
             NearbyRes.res_id = NearbyRes.all[index];
         }
     }
-    $.get('http://localhost:3000/api/v2.1/reviews',res_id)
+    $.get('http://localhost:8000/api/v2.1/reviews',res_id)
         .then(function(reviews){
         var parsed_reviews = JSON.parse(reviews);
         for(i in parsed_reviews.user_reviews){console.log(parsed_reviews.user_reviews[i])}
