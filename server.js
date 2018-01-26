@@ -5,9 +5,10 @@ const bodyParser = require('body-parser');
 const superagent = require('superagent');
 const pg = require('pg');
 const fs = require('fs');
+
 //const conString = 'postgres://postgres:1234@localhost:5432/grub';
-//const conString = 'postgres://postgres:tabinLync@localhost:5432/cf301js';
-const conString = 'postgres://hryuwfriqtupwb:cf75445230798129c0d80c2b139243f2c1deae553f55b5f139d0c37ec7b5c696@ec2-50-19-126-219.compute-1.amazonaws.com:5432/d6370nnudbrrjd';
+const conString = 'postgres://postgres:tabinLync@localhost:5432/cf301js';
+
 
 const client = new pg.Client(conString);
 
@@ -56,6 +57,7 @@ app.get('/api/v2.1/reviews', (req, res) => {
   });
 
   app.post('/user', (request, response) => {
+
 
     client.query(
       `INSERT INTO
@@ -182,6 +184,50 @@ app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 loadDB();
 
 /////database loader //////
+function loadArticles() {
+  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // PUT YOUR RESPONSE HERE
+  client.query('SELECT COUNT(*) FROM users')
+    .then(result => {
+    // REVIEW: result.rows is an array of objects that PostgreSQL returns as a response to a query.
+    // If there is nothing on the table, then result.rows[0] will be undefined, which will make count undefined. parseInt(undefined) returns NaN. !NaN evaluates to true.
+    // Therefore, if there is nothing on the table, line 158 will evaluate to true and enter into the code block.
+      if(!parseInt(result.rows[0].count)) {
+        ///home/tigerhsu/code-301/food-for-thought/public/scripts/sample_users.json
+        fs.readFile('./public/scripts/sample_users.json', 'utf8', (err, fd) => {
+          JSON.parse(fd).forEach(ele => {
+            client.query(`
+              INSERT INTO
+              users(name, email, password)
+              VALUES ($1, $2, $3);
+            `,
+              [ele.name, ele.email, ele.password]
+            )
+          })
+        })
+      }
+    })
+}
+
+function loadDB() {
+  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
+  // PUT YOUR RESPONSE HERE
+  client.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      user_id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL);`
+  )
+    .then(() => {
+      loadArticles();
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+///database loader //////
 function loadUsers() {
   client.query('SELECT COUNT(*) FROM users')
     .then(result => {
