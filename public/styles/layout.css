@@ -1,6 +1,8 @@
 
 body {
 background-color: rgb(243, 239, 239);
+max-width: 950px;
+margin: auto;
 }
 
 #fave:hover {
@@ -219,6 +221,8 @@ img.featured-image {
 }
 
 @media all and (min-width: 800px) {
+    padding-left: 400px;
+    padding-right: 400px;
     .rst-top-level {
         background: white;
         width: 100%;
@@ -229,6 +233,7 @@ img.featured-image {
         border: 2px;
         border-style: solid;
         position: relative;
+        display: inline-block;
      }
      
      .img-info {
