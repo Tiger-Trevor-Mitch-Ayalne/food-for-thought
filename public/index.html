@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/icons.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/dv-layout.css">
     <link rel="stylesheet" href="./styles/modules/user-reg.css">
 
     <meta property="og:image" content="/home/tigerhsu/code-301/food-for-thought/public/styles/reset.css" />
@@ -25,12 +26,15 @@
                </div>
 
                <ul id="menu">
-                    <li data-nav_id="home" style="color:white; text-decoration: none;"><a href="/">Home</a></li>
-                    <li data-nav_id="about"><a href="/about-us-view">About Us</a></li>
-                    <li data-nav_id="contact"><a href="/contact-us-view">Contact Us</a></li>
-                    <li data-nav_id="register"><a href="/register-view">Register</a></li>
-                    <li data-nav_id="login"><a href="/login-view">Login</a></li>
-                    <li data-nav_id="admin"><a href="/admin-view">Admin</a></li>
+                    <input type="number" id="ham-search"  placeholder="ZIP">
+                    <button type="submit" id="searcheByZIP">GO</button>
+                    <li data-nav id="home" style="color:white; text-decoration: none;"><a href="/">Home</a></li>
+                    <li data-nav id="about"><a href="/about-us-view">About Us</a></li>
+                    <li data-nav id="contact"><a href="/contact-us-view">Contact Us</a></li>
+                    <li data-navi id="register"><a href="/register-view">Register</a></li>
+                    <li data-nav id="login"><a href="/login-view">Login</a></li>
+                    <li data-nav id="admin"><a href="/admin-view">Admin</a></li>
+                    
                 </ul>
                 </div>
 
@@ -49,7 +53,7 @@
         <ul id="sideNavUL"></ul>
     </div>
     <form>
-        <input type="text" id="zip">
+        <input type="number" id="zip">
         <button type="submit" id="searchByZIP">Search</button>
     </form>
     <div id="detail-view" class="page">
