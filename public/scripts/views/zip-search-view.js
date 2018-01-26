@@ -4,16 +4,11 @@ var app = app || {};
     const ZipSearchView = {};
 
     const markup = `
-        <div style="margin-left:10%;">
-            
-        <h2>
-            Enter a zip code to find restaurants
-        </h2>
+    <h3>Enter a zip code to find restaurants</h3>
         <form>
             <input type="text" id="zip">
             <button type="submit" id="searchByZIP">Search</button>
         </form>
-        </div>
     `
     const template = Handlebars.compile(markup)
 
@@ -42,6 +37,7 @@ var app = app || {};
                 }
                 console.log('zipData',zipData)
                 localStorage.setItem('zipData',JSON.stringify(zipData));
+                $('#zip-search-view').hide()
             })
             .then(function(){ 
                 $('#list-slot').empty()

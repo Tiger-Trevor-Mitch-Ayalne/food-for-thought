@@ -26,30 +26,7 @@
                 <div id="line-2"></div>
                 <div id="line-3"></div>
             </div>
-
-            <ul id="menu">
-                <li data-nav_id="home" style="color:white; text-decoration: none;">
-                    <a href="/">Home</a>
-                </li>
-                <li data-nav_id="about">
-                    <a href="/about-us-view">About Us</a>
-                </li>
-                <li data-nav_id="contact">
-                    <a href="/contact-us-view">Contact Us</a>
-                </li>
-                <li data-nav_id="register">
-                    <a href="/register-view">Register</a>
-                </li>
-                <li data-nav_id="login">
-                    <a href="/login-view">Login</a>
-                </li>
-                <li data-nav_id="admin">
-                    <a href="/admin-view">Admin</a>
-                </li>
-            </ul>
         </div>
-
-
         <div id="main-menu-view" class="menu">
             <div id="main-menu-slot">
 
@@ -58,6 +35,10 @@
 
         <div id="top-header-view" class="page">
             <div id="top-header-slot"></div>
+        </div>
+
+        <div id="zip-search-view" class="page" style=" margin-left:15%;padding: 50px;">
+            <div id="zip-search-slot"></div>
         </div>
 
         <div id="detail-view" class="page">
@@ -93,6 +74,7 @@
 
         <div id="restaurants-container"></div>
 
+    </section>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
@@ -113,6 +95,7 @@
         <script src="scripts/views/user-view.js"></script>
         <script src="scripts/views/register-view.js"></script>
         <script src="scripts/views/reviews-view.js"></script>
+        <script src="scripts/views/zip-search-view.js"></script>
         <script src="scripts/views/error-view.js"></script>
         <script src="scripts/controllers/routes.js"></script>
         <script>
@@ -129,8 +112,8 @@
                         .then((data) => {
                             zipData = {
                                 zip: data['post code'],
-                                long: data.places[0].latitude,
-                                lat: data.places[0].longitude
+                                latitude: data.places[0].latitude,
+                                longitude: data.places[0].longitude
                             }
                             localStorage.setItem('zipData', JSON.stringify(zipData));
                         })
@@ -168,7 +151,6 @@
                 $("#menu").slideToggle("slow");
             });
         </script>
-    </section>
 </body>
 
 </html>
