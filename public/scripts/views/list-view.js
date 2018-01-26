@@ -7,20 +7,20 @@ var app = app || {};
     <div class="rst-top-level">
         <div class="img-info">
             <div class="rst-img">
+            <a class="rst-name" href="/detail-view/{{id}}">{{name}}</a>
                 <img class="featured-image" src={{featured_image}}>
             </div>
         </div>
+        <div class="detail">
+        <p class="rating-expanded">Rating</p>
+        <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
+         </div>
 
         <div class="rst-info">
-        <a href="/detail-view/{{id}}">{{name}}</a>
+        
             <p class="locality">{{locality_verbose}}</p>
             <p class="address">Address: {{address}}</p>
-        </div>
-
-        <div class="detail">
-            <p class="rating" style="background-color:#{{rating_color}}">{{aggregate_rating}}</p>
-            <p class="votes">Votes: {{votes}} </p>
-        </div>
+        </div>  
 
         <div class="more-info">
             CUISINES: {{cuisines}}
