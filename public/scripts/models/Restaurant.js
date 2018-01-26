@@ -208,6 +208,7 @@ NearbyRes.fetchOne = (id,callback) =>{
     }
     $.get('http://localhost:3000/api/v2.1/reviews',res_id)
         .then(function(reviews){
+            Reviews.all = [];
         var parsed_reviews = JSON.parse(reviews);
         for(i in parsed_reviews.user_reviews){console.log(parsed_reviews.user_reviews[i])}
             for(index in parsed_reviews.user_reviews){
@@ -232,6 +233,8 @@ NearbyRes.fetchOne = (id,callback) =>{
             }
             
             app.ReviewsView.init()
+            app.DetailView.init()
+
 /************
  //* PLEASE NOTE =====> THIS IS FOR BLOCKED URL @ AYANLE'S WORK
         console.log('ERROR with API. Work-around initiated')
@@ -268,6 +271,7 @@ NearbyRes.fetchOne = (id,callback) =>{
 ********/            
         })
         .catch(function(err){
+            alert('line 271')
             console.error(err)
         })
 }
