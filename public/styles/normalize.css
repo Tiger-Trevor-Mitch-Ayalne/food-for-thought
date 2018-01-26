@@ -431,3 +431,7 @@ th {
   color:white;
    text-decoration: none;
 }
+#home:-webkit-any-link {
+  cursor: pointer;
+  text-decoration: none;
+}

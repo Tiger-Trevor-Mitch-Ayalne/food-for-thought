@@ -35,7 +35,14 @@ display: none;
 background-color:white;
 }
 
+
 @media all and (max-width: 600px) {
+    #zip{
+        display: none;
+    }
+    #searchByZIP{
+        display: none;
+    }
     #simple-nav-menu {
         display: none;
         }
