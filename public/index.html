@@ -13,12 +13,29 @@
     <meta property="og:image" content="/home/tigerhsu/code-301/food-for-thought/public/styles/reset.css" />
 
       <style>
-        ul#simple-nav-menu li {
+
+            /* ul#simple-nav-menu li {
             display:inline;
+
+          } */
+          @media all and (max-width: 800px) {
+           body {background-color: rgb(246, 255, 127);}
         }
-        body {
+
+        @media all and (min-width: 600px) {
+            body {background-color: brown;}
+        }
+        @media all and (min-width: 800px) {
+           body {background-color: blue;}
+        }
+        @media all and (max-width: 800px) {
+           body{ background-color: black;}
+        }
+
+        /* body {
             background-color: aqua;
-        }
+        } */
+
         #simple-nav-menu{
             list-style: none;
             margin: 1%;
@@ -35,9 +52,85 @@
             padding: 1em;
             color: white;
         }
+        
+    
+    
+        /* header{
+	    width:100%; 
+	    background:#ffffff; 
+	    height:60px; 
+	line-height:60px;
+	border-bottom:1px solid #dddddd;
+}
+.hamburger{
+  background:none;
+  position:absolute;
+  top:0;
+  right:0;
+  line-height:45px;
+  padding:5px 15px 0px 15px;
+  color:#999;
+  border:0;
+  font-size:1.4em;
+  font-weight:bold;
+  cursor:pointer;
+  outline:none;
+  z-index:10000000000000;
+}
+.cross{
+  background:none;
+  position:absolute;
+  top:0px;
+  right:0;
+  padding:7px 15px 0px 15px;
+  color:#999;
+  border:0;
+  font-size:3em;
+  line-height:65px;
+  font-weight:bold;
+  cursor:pointer;
+  outline:none;
+  z-index:10000000000000;
+}
+.menu{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
+.menu ul {margin: 0; padding: 0; list-style-type: none; list-style-image: none;}
+.menu li {display: block;   padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
+.menu li:hover{display: block;    background:#ffffff; padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
+.menu ul li a { text-decoration:none;  margin: 0px; color:#666;}
+.menu ul li a:hover {  color: #666; text-decoration:none;}
+.menu a{text-decoration:none; color:#666;}
+.menu a:hover{text-decoration:none; color:#666;}
+
+.glyphicon-home{
+  color:rgb(216, 42, 42); 
+  font-size:1.5em; 
+  margin-top:5px; 
+  margin:0 auto;
+}
+header{display:inline-block; font-size:12px;}
+span{padding-left:20px;}
+a{color:#336699;} */
 
         </style>
         <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADK1OlOytTpTn+y5UbK1OlOf7LlRsrU6U4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADK1OlOf7Ll/wByzP8Af8z/AH/M/wB/zP8Af8z/AH/M/wCMzP9/suVGytTpTgAAAAAAAAAAAAAAAAAAAAB/suX/AH/M/wCY2P89s+P/AH/L/z2z4/8Af8v/PbPj/z2z4/89s+P/AIzM/z+L2P/K1OlOAAAAAAAAAAAAAAAAAGXM/wB/y/8AGYf/ABmH/wAllP8AGYf/ACWU/wBxWf8AJZT/GWa6/z2z4/8ZmOX/AFi//8rU6U4AAAAAAAAAAAAZev8AJY//AEuy/wAZh/8AWI//AGWc/wDbcv8AcVn/ACWP/wAMdv8MM37/PbPj/wB/y/8AS7L/AAAAAADwcv8/P4//ADKc/wA/fv8A8HL/AORM/wDkTP8A23L/AONy/wBxWf8ADH7/AAxt/z8/fv9/f6X/AH/L/wBLsv8Alyb/AJxh/wBuHf8Aex3/Zrp//3/Qf/9yvv//sv7//3K+//8AiwD/AKU7/wBcUP9/f6X/f3+l/39/pf8Af8v/v9y//wCXJv8Alyb/Wam//3K+//9Msf//TLH//3K+//+Zy///cr7//8z+//8mz2X/AJgA/z+pP/+/5b//AEuy/7/cv/8ynL//TLH//2XL//9LvvL/MrLl/xmy5f8msuX/GbLl/z++//8mpfL/Jpy//wx2P/8AXAD/P5g//7/cv//Y8v81WMv//wyl2P8Af8z/AIzM/wBlzP8Acsz/AHLM/wByzP8Af8z/AH/M/wB/zP8ZpeX/GYey/3/Lf/+/5b//suX//xmy5f8Aftj/AHHY/wCL8P8Ai/D/AIvw/wCL8P8Ai/D/AHHY/wB/zP8Af8z/AH/M/wByv/8Zh7L/ytTp/8rU6U4ZsvH/DKX9/wyl/f8AmP3/AJj9/wCY/f8AmP3/AIvw/wCL8P8Acdj/AHHY/wByzP8WXbv/Fl27/5Wq1P8AAAAAWcv+/ya//v8Mpf3/DKX9/wyl/f8AmP3/AJj9/wCL8P8Ai/D/AIvw/wBx2P8Acdj/IVmy/yFZsv/K1OlOAAAAAAAAAACM2P7/GbL+/wyl/f8Mpf3/DKX9/wyl/f8Mpf3/AH7k/wBx2P8Acdj/LFWq/yFZsv+VqtT/ytTpTgAAAAAAAAAAAAAAAMrU6U6/5f7/f8v+/wBx2P8Acdj/C2HD/xZpx/8hWbL/larU/5Wq1P/K1OlOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAOAfAACABwAAgAMAAIABAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAgAEAAMABAADwBwAA//8AAA==" rel="icon" type="image/x-icon" />
+
+        <header>
+	
+            <button class="hamburger">&#9776;</button>
+            <button class="cross">&#735;</button>
+          </header>
+          
+          <div class="menu">
+            <!-- <ul>
+              <a href="#"><li>Home</li></a>
+              <a href="#"><li>About Us</li></a>
+              <a href="#"><li>Contact Us</li></a>
+              <a href="#"><li>Registar</li></a>
+              <a href="#"><li>Login</li></a>
+              <a href="#"><li>Admin</li></a>
+            </ul> -->
+          </div> 
+
 </head>
 <body>
     <div id="main-menu-view" class="menu">
