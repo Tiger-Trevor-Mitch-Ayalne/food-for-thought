@@ -40,6 +40,8 @@ body {
 }
 .rst-top-level {
   background-color: white;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .rst-img {
