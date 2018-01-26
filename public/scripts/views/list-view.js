@@ -7,7 +7,7 @@ var app = app || {};
     <div class="rst-top-level">
         <div class="img-info">
             <div class="rst-img">
-            <a href="/detail-view/{{id}}">{{name}}</a>
+            <a class="rst-name" href="/detail-view/{{id}}">{{name}}</a>
                 <img class="featured-image" src={{featured_image}}>
             </div>
         </div>
