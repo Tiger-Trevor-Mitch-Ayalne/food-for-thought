@@ -9,9 +9,8 @@ var app = app || {};
             <li data-nav_id="about"><a href="/about-us-view">About Us</a></li>
             <li data-nav_id="contact"><a href="/contact-us-view">Contact Us</a></li>
             <li data-nav_id="register"><a href="/register-view">Register</a></li>
-            <li data-nav_id="user-view"><a href="/user-view">User View</a></li>
+            <li data-nav_id="my-favorites"><a href="/my-favorites">My Favorites</a></li>
             <li data-nav_id="login"><a href="/login-view">Login</a></li>
-            <li data-nav_id="admin"><a href="/admin-view">Admin</a></li>
         </ul>
     `
     const template = Handlebars.compile(markup)

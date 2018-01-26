@@ -4,11 +4,11 @@ var app = app || {};
     const ZipSearchView = {};
 
     const markup = `
-        <h1>
-            zip code search
-        </h1>
         <div style="margin-left:10%;">
             
+        <h2>
+            Enter a zip code to find restaurants
+        </h2>
         <form>
             <input type="text" id="zip">
             <button type="submit" id="searchByZIP">Search</button>
@@ -19,6 +19,9 @@ var app = app || {};
 
     function renderThings() {
         $('#zip-search-slot').empty()
+        //list-slot
+        
+        $('#list-slot').empty()
         $('#zip-search-slot').append(template())
     }
     ZipSearchView.init = () => {
@@ -40,7 +43,9 @@ var app = app || {};
                 console.log('zipData',zipData)
                 localStorage.setItem('zipData',JSON.stringify(zipData));
             })
-            .then(function(){ app.ListView.init() })
+            .then(function(){ 
+                $('#list-slot').empty()
+                app.ListView.init() })
             .catch(function(err){ console.error(err)});
         });
     }

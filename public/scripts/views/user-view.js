@@ -30,7 +30,7 @@ var app = app || {};
 
             <div class="menu">
                 <a href="{{menu_url}}">Menu</a>
-                <a data-fave_id="{{fave_id}}" id="delete-fave" style="position: absolute; right: 20px;">delete</a>
+                <a data-fave_id="{{fave_id}}" id="delete-fave" class="delete-fave" style="position: absolute; right: 20px;">delete</a>
             </div>
 
         </div>
@@ -50,7 +50,7 @@ var app = app || {};
         app.NearbyRes.getFaves(()=>{
             renderThings();
         },()=>{
-            $("#delete-fave").on('click',function(){
+            $(".delete-fave").on('click',function(){
                 console.log('delete-fave clicked')
                 var fave_id = $(this).attr('data-fave_id');
                 app.NearbyRes.deletefaveIt(fave_id);
@@ -59,6 +59,7 @@ var app = app || {};
                 });
             })
         });
+        
     }
     module.UserView = UserView
 })(app)

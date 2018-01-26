@@ -30,10 +30,10 @@ var app = app || {};
         app.Admin.fetchUsers()
         // handle UserForm
         $('#login').on('click', function (e) {
-            console.log("$('#password_logForm').val()", $('#password_logForm').val(), "$('#email_logForm').val()",
-                $('#email_logForm').val())
+            var user = $('#email_logForm').val();
+            app.Admin.fetchUsers(user)
+            page('/')
             e.preventDefault()
-
         });
         app.NearbyRes.getFaves()
 
