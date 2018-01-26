@@ -158,6 +158,7 @@ img.featured-image {
     ul#simple-nav-menu li {
 
         display: inline;
+        position: relative;
         }
 
         #hamburger {
