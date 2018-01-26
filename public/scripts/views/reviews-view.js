@@ -6,7 +6,7 @@ var app = app || {};
     const markup = `
         
         <div class="rst-top-level">
-        <a href="{{profile_url}}id="rvw-name" style="font-weight:bold">{{name}}</a>
+        <a href="{{profile_url}}id="rvw-name" style="font-weight:bold"><h4 id = "rvw-profile">{{name}}</h4></a>
         
         <img id="rvw-img" src="{{profile_image}}">
         <p id="rvw-rating" style="background-color:#{{rating_color}}">{{rating}}</p>
