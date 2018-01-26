@@ -4,6 +4,7 @@ var app = app || {};
     const ReviewsView = {};
 
     const markup = `
+        
         <div class="rst-top-level">
         <a href="{{profile_url}}id="rvw-name" style="font-weight:bold">{{name}}</a>
         
