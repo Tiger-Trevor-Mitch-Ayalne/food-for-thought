@@ -52,6 +52,8 @@ var app = app || {};
                     $.post('/user',NewUserAccount)
                       .then(data => {
                         console.log(data);
+                        
+                        page('/login-view')
                         if (callback) callback();
                     
                       });

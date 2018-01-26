@@ -6,14 +6,18 @@ var app = app || {};
     const markup = `
         <div>
             <h4 class="rest-local"> Restaurants around {{title}}  </h4>
+
         </div>
         <hr>
     `
     const template = Handlebars.compile(markup)
 
     function renderThings() {
-        console.log('app.UserLocation.all[0]',app.UserLocation.all[0])
-        $('#top-header-slot').append((template(app.UserLocation.all[0])))
+        var zip = localStorage.getItem('zipData');
+        var zipGeo = JSON.parse(zip)
+        console.log('zipGeo', zipGeo)
+
+        $('#top-header-slot').append((template(zipGeo)))
     }
     TopHeaderView.init = () => {
         console.log('inside top-header')
