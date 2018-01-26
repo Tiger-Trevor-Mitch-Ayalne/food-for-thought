@@ -5,13 +5,7 @@ var app = app || {};
 
     const markup = `
         <div>
-            <h4> Find Restaurants around {{title}}  </h4>
-            <p>city_id = {{city_id}} // 
-                city_name = {{city_name}} //
-                latitude = {{latitude}} // 
-                longitude = {{longitude}} //
-                title = {{title}}
-            </p>
+            <h4> Restaurants around {{title}}  </h4>
         </div>
         <hr>
     `
