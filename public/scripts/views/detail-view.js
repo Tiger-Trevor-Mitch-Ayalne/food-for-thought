@@ -31,11 +31,11 @@ var app = app || {};
                 <a href="{{menu_url}}">Menu</a>
                 <a data-res_id="{{id}}" id="fave-detail" style="position: absolute; right: 20px;">save</a>
             </div>
-
+            <div id="googleMap" style="width:70%;height:300px;"></div>
         </div>
 
-        <div id="googleMap" style="width:70%;height:300px;"></div>
-        <hr>
+        
+        
     `
     const template = Handlebars.compile(markup)
 
