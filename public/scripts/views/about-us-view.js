@@ -15,10 +15,14 @@ var app = app || {};
     const template = Handlebars.compile(markup)
 
     function renderThings() {
+        app.Admin.aboutUs.forEach(res => {
+            console.log(res.dev_team.name)
+            $('#about-us-slot').append(template(res))
+        })
         $('#about-us-slot').empty()
-        $('#about-us-slot').append(template())
     }
     AboutUsView.init = () => {
+        app.Admin.fetchAboutUs()
         $('#about-us-view').off()
         renderThings()
         $('#about-us-view').show()

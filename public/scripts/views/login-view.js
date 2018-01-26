@@ -10,8 +10,11 @@ var app = app || {};
         <form id="userLogForm">
             <input type="email" id="email_logForm" placeholder="Your Email" required>
             <input type="password" id="password_logForm" placeholder="Create Password" required>
-            <button type="submit" id="login">Register</button>
+            <button type="submit" id="login">Log-in</button>
         </form>
+        <div id="user-faves-view" class="page">
+            <div id="user-faves-slot"></div>
+        </div>
     `
     const template = Handlebars.compile(markup)
 
@@ -24,27 +27,16 @@ var app = app || {};
         renderThings()
         $('#login-view').show()
         $('#userLogForm').off()
+        app.Admin.fetchUsers()
         // handle UserForm
-        $('#login').on('click',function(e){
-            console.log("$('#password_logForm').val()",$('#password_logForm').val(),"$('#email_logForm').val()",
-$('#email_logForm').val() )
+        $('#login').on('click', function (e) {
+            var user = $('#email_logForm').val();
+            app.Admin.fetchUsers(user)
+            page('/')
             e.preventDefault()
-            var existingUser = localStorage.getItem('userAccount');
-            var userAccount = JSON.stringify(existingUser)
-            if(
-                $('#email_logForm').val() == userAccount.email 
-                &&
-                $('#password_logForm').val() == userAccount.password
-            ){
-                    $('#userLogForm').fadeOut( "slow");
-            }
-            else{
-                if($('#email_logForm').val() != userAccount.email){$('#email_logForm').css("background-color", "yellow");}
-                if($('#password_logForm').val() != userAccount.password){$('#password_logForm').css("background-color", "yellow");}
-            }
         });
+        app.NearbyRes.getFaves()
 
-        
     }
     module.LoginView = LoginView
 })(app)
