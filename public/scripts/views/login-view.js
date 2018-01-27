@@ -37,6 +37,7 @@ var app = app || {};
                 app.ListView.init()
             })
         });
+        console.log('line 40 of login')
         app.NearbyRes.getFaves()
 
     }

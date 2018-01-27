@@ -141,7 +141,7 @@ var app = app || {};
             /*****/
             function (error) {
                 if (error.code == error.PERMISSION_DENIED) {
-                    console.log('Permission DENIED');
+                    console.log('GEO Permission BLOCKED');
                     if (localStorage.zipData == undefined) {
                         app.ZipSearchView.init()
                     }
@@ -257,6 +257,7 @@ var app = app || {};
             })
     }
     NearbyRes.faveIt = (id) => {
+        console.log('line 260 of restaurants')
         var res_id = {
             id: id
         };
@@ -283,6 +284,8 @@ var app = app || {};
             });
     }
     NearbyRes.getFaves = (callback, callback2) => {
+        
+        console.log('line 287 of restaurants')
         //TO DO: load faves by user
         $.get('/allfaves')
             .then(data => {
@@ -292,7 +295,11 @@ var app = app || {};
                 if (callback) callback();
                 if (callback2) callback2();
 
-            });
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            ;
     }
     NearbyRes.deleteFaveArray = (id) => {
         for(var i=0;i<app.NearbyRes.user_favorites.length;i++){
@@ -355,8 +362,10 @@ var app = app || {};
                         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
                     }
                 }
+                console.log('line 358')
             })
             .then(()=>{
+                console.log('line 361')
                 callback()
             })
             ;
