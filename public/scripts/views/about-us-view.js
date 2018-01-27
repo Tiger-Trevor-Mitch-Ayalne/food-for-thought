@@ -4,10 +4,13 @@ var app = app || {};
     const AboutUsView = {};
 
     const markup = `
-        <div style="margin:10%;">
-        <img class="featured-image" src={{img_src}}> <strong>{{name}}</strong>
-        <br> 
+        <div class= "profile";>
+        <img class="featured-image-profile" src={{img_src}}>
+    
+        <h2 class = "name"><strong id ="name_id">{{name}}</strong></h2>
+        <br> <div class = "write_about">
         {{{write_up}}}
+        <div>
         </div>
     `
     const template = Handlebars.compile(markup)
