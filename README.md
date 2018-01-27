@@ -1,22 +1,44 @@
 # Grub Here
 
 **Authors**: Tiger Hsu, Trevor Dobson, Mitch Hall , and  Ayanle
-**Version**: 1.0.0  Started adding files, JSON, 
+**Version**: 2.0.0  Started adding files, JSON, 
 
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 301 class. (i.e. What's your problem domain?) -->
+This application allows user to locate nearby resturants using either zipcode search or by Geographic location. The User can then view lists up to 30 resturants in a list view or one resturant at a time in single view. This application has a built in functionality using an API called from Zumato and google maps.
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+-Zumato API
+-Google API
+-handlebars 
+-Javascript
+-Jquery
+-JSON
+-HTML,CSS
+-PSQL and HEROKU
 
 ## Change Log
-<Use this are to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
+01-15-2018 4:59pm - Application has a server.js file with appropriate folders
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
+01-16-2018 8:59pm - API calls were completed to zumato website to retrieve JSON data.  
+
+01-17-2018 8:59pm - JSON files were filtered in order to retrieve resturant names, and images, appropiate files landing pages were created and page.js is utilized to populate the page with html.
+
+01-18-2018 8:59pm - Competed JSON file filter with approprate view passed in handle bars in order to append to html.
+
+01-20-2018 8:59pm - 
+
+01-22-2018 8:59pm - psql was used in order to create a backend database which will hold user names, and passwords.
+
+01-23-2018 8:59pm - functionality is present on resturant reviews
+
+
+01-24-2018 8:59pm- functionally is present on 
+
+01-27-2018 8:59pm- Application now has a fully-functional express server, with GET and POST routes for the resturant resource.
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
