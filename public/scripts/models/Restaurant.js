@@ -348,15 +348,22 @@ var app = app || {};
 
             });
     }
-    Admin.fetchAboutUs = () => {
-        $.get('/scripts/about-us.json')
-        .then(function(reviewsTestData){
-            console.log(reviewsTestData.responseText.dev_team)
+    Admin.fetchAboutUs = (callback) => {
+        console.log('fetchAboutUs')
+        Admin.aboutUs = [];
+        var url = 'http://localhost:3000/scripts/about-us.json';
+        $.get(url)
+            .then(function(reviewsTestData){
+            for(var index in reviewsTestData){
+                var result = reviewsTestData[index];
+                for(var i=0; i<result.length; i++){                  
+                    Admin.aboutUs.push(result[i]);
+                    console.log([i],Admin.aboutUs)
+                }
+            }
+        }).then(()=>{
+            callback()
         })
-        .catch(function(err){
-            //console.log(err.responseText)
-            Admin.aboutUs = JSON.parse(err.responseText);
-        });
     }
     module.Admin = Admin;
     module.NearbyRes = NearbyRes;

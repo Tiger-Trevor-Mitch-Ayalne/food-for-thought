@@ -4,28 +4,33 @@ var app = app || {};
     const AboutUsView = {};
 
     const markup = `
-        <h1>
-            About Us
-        </h1>
         <div style="margin-left:10%;">
-        Our aim is to help you find and connect with local eateries.
-        
+        <img class="featured-image" src={{img_src}}>
+        img_src = {{img_src}}
+        name = {{name}}
+        write_up = {{{write_up}}}
         </div>
     `
     const template = Handlebars.compile(markup)
 
     function renderThings() {
-        app.Admin.aboutUs.forEach(res => {
-            console.log(res.dev_team.name)
-            $('#about-us-slot').append(template(res))
-        })
+        console.log('render things')
         $('#about-us-slot').empty()
+        app.Admin.aboutUs.forEach(res => {
+            console.log('inside aboutus loop')
+            $('#about-us-slot').append((template(res)))
+        })
+        
+        $('#about-us-view').show()
     }
     AboutUsView.init = () => {
-        app.Admin.fetchAboutUs()
+        alert('about us init')
         $('#about-us-view').off()
-        renderThings()
-        $('#about-us-view').show()
+        app.Admin.fetchAboutUs(()=>{
+            renderThings();
+        },()=>{
+            $('#about-us-view').show()
+        })
     }
     module.AboutUsView = AboutUsView
 })(app)

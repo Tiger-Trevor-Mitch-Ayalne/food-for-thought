@@ -24,26 +24,7 @@ var app = app || {};
         $('#zip-search-view').off()
         renderThings()
         $('#zip-search-view').show()
-        $('#searchByZIP').on('click',function(e){
-            e.preventDefault()
-            var zip = $('#zip').val();
-            console.log($('#zip').val())
-            $.get('http://api.zippopotam.us/us/'+zip)
-            .then((data)=>{
-                zipData = {
-                    latitude:data.places[0].latitude,
-                    longitude:data.places[0].longitude,
-                    city_name:data.places[0]['place name']
-                }
-                console.log('zipData',zipData)
-                localStorage.setItem('zipData',JSON.stringify(zipData));
-                $('#zip-search-view').hide()
-            })
-            .then(function(){ 
-                $('#list-slot').empty()
-                app.ListView.init() })
-            .catch(function(err){ console.error(err)});
-        });
+        
     }
     module.ZipSearchView = ZipSearchView
 })(app)

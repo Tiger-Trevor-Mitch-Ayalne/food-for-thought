@@ -5,7 +5,7 @@ var app = app || {};
 
     const markup = `
         <div>
-            <h4 class="rest-local"> Restaurants around {{title}}  </h4>
+            <h4 class="rest-local"> Restaurants around {{city_name}}  </h4>
 
         </div>
         <hr>
