@@ -5,7 +5,7 @@ page('/*', (ctx, next) => {
     app.Admin.checkUserStat()
     next()
 })
-page('/', ()=>{
+page('/', function(){
     app.ListView.init()
     app.TopHeaderView.init()
     

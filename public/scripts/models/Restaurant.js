@@ -294,12 +294,25 @@ var app = app || {};
 
             });
     }
+    NearbyRes.deleteFaveArray = (id) => {
+        for(var i=0;i<app.NearbyRes.user_favorites.length;i++){
+            var resHolder = app.NearbyRes.user_favorites[i];
+            for(var i=0; i<resHolder.length; i++){
+    
+                 if(id == resHolder[i].id){
+                console.log(delete resHolder[i])
+                }
+            }
+        }
+    }
     Admin.checkUserStat = () => {
         if (localStorage.loggedInUser) {
             var localU = localStorage.getItem('loggedInUser')
             var u = JSON.parse(localU);
             if (u.loggedIn == true && u !== undefined) {
 
+
+                setTimeout(function(){ $('#list-slot').find('.faver').show()}, 1000);
                 $('li[data-nav_id="my-favorites"]').show()
                 $('li[data-nav_id="login"]').hide()
                 $('li[data-nav_id="admin"]').hide()
@@ -314,7 +327,7 @@ var app = app || {};
         }
         else{
             $('li[data-nav_id="my-favorites"]').hide()
-
+            setTimeout(function(){ $('#list-slot').find('.faver').hide()}, 1000);
         }
     }
     Admin.fetchUsers = (email,callback) => {
@@ -344,7 +357,7 @@ var app = app || {};
     }
     Admin.fetchAboutUs = (callback) => {
         Admin.aboutUs = [];
-        var url = 'http://localhost:3000/scripts/about-us.json';
+        var url = '/scripts/about-us.json';
         $.get(url)
             .then(function(reviewsTestData){
             for(var index in reviewsTestData){

@@ -20,7 +20,7 @@ var app = app || {};
             <br> COST FOR TWO: $ {{average_cost_for_two}}</p>
             <div>
                 <a href="{{menu_url}}">Menu</a>
-                <a data-res_id="{{id}}" id="fave" style="position: absolute; right: 20px;">save</a>
+                <a data-res_id="{{id}}" id="fave" class="faver" style="position: absolute; right: 20px;">save</a>
             </div>
         </div>
     </div>
@@ -38,14 +38,13 @@ var app = app || {};
     ListView.init = () => {
         $('#list-slot').empty()
         $('#list-view').off()
-
-        app.NearbyRes.fetchAll(()=>{
+        renderThings()
+        app.NearbyRes.fetchAll(function(){
             renderThings()
             
-            $("#fave").on('click',function(){
-                var faveIt = $(this).attr('data-res_id');
-                app.NearbyRes.faveIt(faveIt);
-                console.log($(this).attr('data-res_id'));
+            $(".faver").on('click',function(){
+                console.log('res_id',$(this).attr('data-res_id'));
+                app.NearbyRes.faveIt($(this).attr('data-res_id'));
             })
         });
         $('#list-view').show()
