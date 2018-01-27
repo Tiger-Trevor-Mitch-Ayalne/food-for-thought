@@ -4,11 +4,10 @@ var app = app || {};
     const AboutUsView = {};
 
     const markup = `
-        <div style="margin-left:10%;">
-        <img class="featured-image" src={{img_src}}>
-        img_src = {{img_src}}
-        name = {{name}}
-        write_up = {{{write_up}}}
+        <div style="margin:10%;">
+        <img class="featured-image" src={{img_src}}> <strong>{{name}}</strong>
+        <br> 
+        {{{write_up}}}
         </div>
     `
     const template = Handlebars.compile(markup)
@@ -24,7 +23,6 @@ var app = app || {};
         $('#about-us-view').show()
     }
     AboutUsView.init = () => {
-        alert('about us init')
         $('#about-us-view').off()
         app.Admin.fetchAboutUs(()=>{
             renderThings();

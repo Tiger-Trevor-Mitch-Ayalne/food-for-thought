@@ -75,9 +75,6 @@
         <div id="admin-view" class="page">
             <div id="admin-slot"></div>
         </div>
-        <div id="user-view" class="page">
-            <div id="user-slot"></div>
-        </div>
         <div id="register-view" class="page">
             <div id="register-slot"></div>
         </div>
@@ -89,6 +86,9 @@
         </div>
         <div id="login-view" class="page">
             <div id="login-slot"></div>
+        </div>
+        <div id="user-view" class="page">
+            <div id="user-slot"></div>
         </div>
         <div id="error-view" class="page">
             <div id="error-slot"></div>
@@ -109,7 +109,6 @@
         <script src="scripts/views/detail-view.js"></script>
         <script src="scripts/views/admin-view.js"></script>
         <script src="scripts/views/navigation/main-menu-view.js"></script>
-        <script src="scripts/views/navigation/side-nav-view.js"></script>
         <script src="scripts/views/navigation/top-header-view.js"></script>
         <script src="scripts/views/about-us-view.js"></script>
         <script src="scripts/views/contact-us-view.js"></script>
@@ -129,12 +128,10 @@
                 $('#searchByZIP').on('click',function(e){
                     e.preventDefault()
                     var zip = $('#zip').val();
-                    console.log($('#zip').val())
                     var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+zip;
                     $.get(url)
                     .then(function(reviewsTestData){
                         for(var index in reviewsTestData){
-                            console.log('formatted_address',reviewsTestData[index][0].formatted_address,'lat',reviewsTestData[index][0].geometry.location.lat,'lng',reviewsTestData[index][0].geometry.location.lng)
                         var zipData = {
                             zip: reviewsTestData[index][0].formatted_address,
                             latitude: reviewsTestData[index][0].geometry.location.lat,

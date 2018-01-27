@@ -39,24 +39,28 @@ var app = app || {};
 
     function renderThings() {
         $('#user-slot').empty()
-        app.NearbyRes.user_favorites.forEach(res => {
-            $('#user-slot').append((template(res)))
-        })
+        for(var i=0;i<app.NearbyRes.user_favorites.length;i++){
+            var resHolder = app.NearbyRes.user_favorites[i];
+            for(var i=0; i<resHolder.length; i++){
+                $('#user-slot').append((template(resHolder[i])))
+            }
+        }
     }
     UserView.init = () => {
         $('#user-view').off()
         renderThings()
         $('#user-view').show()
         app.NearbyRes.getFaves(()=>{
-            renderThings();
+            renderThings()
         },()=>{
-            $(".delete-fave").on('click',function(){
+            $("#delete-fave").on('click',function(){
                 console.log('delete-fave clicked')
                 var fave_id = $(this).attr('data-fave_id');
                 app.NearbyRes.deletefaveIt(fave_id);
                 app.NearbyRes.getFaves(()=>{
                     renderThings();
                 });
+
             })
         });
         

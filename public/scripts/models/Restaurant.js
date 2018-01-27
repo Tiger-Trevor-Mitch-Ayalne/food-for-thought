@@ -5,7 +5,6 @@ var app = app || {};
     Admin.all = [];
     Admin.aboutUs = [];
     UserLocation.all = [];
-    Topcuisines.all = [];
     NearbyRes.all = [];
     NearbyRes.user_favorites = [];
     Reviews.all = [];
@@ -19,10 +18,6 @@ var app = app || {};
         this.latitude = latitude;
         this.longitude = longitude;
         this.city_name = city_name;
-    }
-    // Topcuisines
-    function Topcuisines(top_cuisines) {
-        this.top_cuisines = top_cuisines;
     }
     // nearbyRes
     function NearbyRes(data) {
@@ -94,7 +89,10 @@ var app = app || {};
                 console.log('Permission ACCEPTED', 'SET: zipData', zipData)
                 localStorage.setItem('zipData', JSON.stringify(zipData))
             }
-            $.get('/api/v2.1/geocode', zipData)
+            var zLocal = localStorage.getItem('zipData')
+            var zParsed = JSON.parse(zLocal)
+            console.log('line 94',zParsed)
+            $.get('/api/v2.1/geocode', zParsed)
                 .then(function (data) {
                     var res = JSON.parse(data)
                     for (index in res.nearby_restaurants) {
@@ -106,9 +104,6 @@ var app = app || {};
                         city_name: res.location.city_name
                     }
                     localStorage.setItem('zipData', JSON.stringify(zipData))
-                    Topcuisines.all.push(new Topcuisines(
-                        data.popularity.top_cuisines
-                    ));
                     app.TopHeaderView.init()
                     app.SideNavView.init()
                 }).then(() => {
@@ -153,7 +148,7 @@ var app = app || {};
                     else {
                         var zip = localStorage.getItem('zipData');
                         var zipGeo = JSON.parse(zip)
-                        console.log('zipGeo', zipGeo)
+                        console.log('line 149',zipGeo)
                         $.get('/api/v2.1/geocode', zipGeo)
                             .then(function (data) {
                                 var res = JSON.parse(data)
@@ -166,9 +161,6 @@ var app = app || {};
                                     res.location.latitude,
                                     res.location.longitude,
                                     res.location['place name']
-                                ));
-                                Topcuisines.all.push(new Topcuisines(
-                                    res.popularity.top_cuisines
                                 ));
                                 app.TopHeaderView.init()
                                 app.SideNavView.init()
@@ -194,7 +186,6 @@ var app = app || {};
         };
         for (index in NearbyRes.all) {
             if (id == NearbyRes.all[index].id) {
-                console.log('NearbyRes.all[index]', NearbyRes.all[index])
                 NearbyRes.res_id = NearbyRes.all[index];
             }
         }
@@ -202,7 +193,6 @@ var app = app || {};
             .then(function (reviews) {
                 Reviews.all = [];
                 var parsed_reviews = JSON.parse(reviews);
-                for (i in parsed_reviews.user_reviews) { console.log(parsed_reviews.user_reviews[i]) }
                 for (index in parsed_reviews.user_reviews) {
                     Reviews.all.push(new Reviews(
                         parsed_reviews.user_reviews[index].review.comments_count,
@@ -275,10 +265,8 @@ var app = app || {};
                 NearbyRes.fave = NearbyRes.all[index];
                 var u = JSON.parse(localStorage.loggedInUser)
                 NearbyRes.fave.user_id = u.user_id;
-                console.log('NearbyRes.faveIt', NearbyRes.fave.user_id)
                 $.post('/faves', NearbyRes.fave)
                     .then(data => {
-                        console.log(data);
                         if (callback) callback();
 
                     });
@@ -291,7 +279,6 @@ var app = app || {};
             method: 'DELETE'
         })
             .then(data => {
-                console.log(data);
                 if (callback) callback();
             });
     }
@@ -299,8 +286,9 @@ var app = app || {};
         //TO DO: load faves by user
         $.get('/allfaves')
             .then(data => {
-                NearbyRes.user_favorites = data;
-                console.log(data);
+                // console.log('data',data)
+                NearbyRes.user_favorites.push(data);
+                // console.log('NearbyRes.user_favorites',NearbyRes.user_favorites)
                 if (callback) callback();
                 if (callback2) callback2();
 
@@ -324,8 +312,12 @@ var app = app || {};
                 $('li[data-nav_id="register"]').show()
             }
         }
+        else{
+            $('li[data-nav_id="my-favorites"]').hide()
+
+        }
     }
-    Admin.fetchUsers = (email) => {
+    Admin.fetchUsers = (email,callback) => {
         $.ajax({
             url: '/users',
             method: 'get'
@@ -334,7 +326,6 @@ var app = app || {};
                 localStorage.setItem('users', JSON.stringify(data))
                 for (var index in data) {
                     if (email == data[index].email) {
-                        console.log(data[index])
                         var loggedInUser = {
                             user_id: data[index].user_id,
                             email: data[index].email,
@@ -345,11 +336,13 @@ var app = app || {};
                         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
                     }
                 }
-
-            });
+            })
+            .then(()=>{
+                callback()
+            })
+            ;
     }
     Admin.fetchAboutUs = (callback) => {
-        console.log('fetchAboutUs')
         Admin.aboutUs = [];
         var url = 'http://localhost:3000/scripts/about-us.json';
         $.get(url)
@@ -358,17 +351,16 @@ var app = app || {};
                 var result = reviewsTestData[index];
                 for(var i=0; i<result.length; i++){                  
                     Admin.aboutUs.push(result[i]);
-                    console.log([i],Admin.aboutUs)
                 }
             }
         }).then(()=>{
             callback()
         })
     }
+
     module.Admin = Admin;
     module.NearbyRes = NearbyRes;
     module.UserLocation = UserLocation;
-    module.Topcuisines = Topcuisines;
     module.Reviews = Reviews;
 
 })(app)
