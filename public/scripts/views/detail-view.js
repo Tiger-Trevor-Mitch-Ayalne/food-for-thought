@@ -20,7 +20,7 @@ var app = app || {};
         <br> COST FOR TWO: $ {{average_cost_for_two}}</p>
         <div id="menu-save">
             <a href="{{menu_url}}">Menu</a>
-            <a data-res_id="{{id}}" id="fave" style="position: absolute; right: 20px;">save</a>
+            <a data-res_id="{{id}}" id="fave" class="faver" style="position: absolute; right: 20px;">save</a>
         </div>
     </div>
     <div id="googleMap" style="width:70%;height:300px;"></div>

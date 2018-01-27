@@ -11,7 +11,6 @@ var app = app || {};
             <li data-nav_id="register"><a href="/register-view">Register</a></li>
             <li data-nav_id="my-favorites"><a href="/my-favorites">My Favorites</a></li>
             <li data-nav_id="login"><a href="/login-view">Login</a></li>
-            <li data-nav_id="admin"><a href="/admin-view">Admin</a></li>
         </ul>
     `;
     const template = Handlebars.compile(markup)

@@ -4,7 +4,7 @@ var app = app || {};
     const AboutUsView = {};
 
     const markup = `
-        <div style="margin:10%;">
+        <div>
         <img class="featured-image" src={{img_src}}> <strong>{{name}}</strong>
         <br> 
         {{{write_up}}}

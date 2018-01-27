@@ -4,7 +4,7 @@ var app = app || {};
     const ContactUsView = {};
 
     const markup = `
-        <div style="margin:10%;">
+        <div>
         <img class="featured-image" src="http://lorempixel.com/output/food-q-c-640-480-8.jpg"> <strong>We've got a hunger for your feedback. </strong>
         <br> 
         {{{write_up}}}

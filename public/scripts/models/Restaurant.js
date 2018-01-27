@@ -23,7 +23,7 @@ var app = app || {};
     function NearbyRes(data) {
         this.average_cost_for_two = data.average_cost_for_two;
         this.cuisines = data.cuisines;
-        this.featured_image = data.featured_image;
+        this.featured_image = data.featured_image === "" ? "http://clk.com.au/img/no-photo.jpg" : data.featured_image;
         this.has_online_delivery = data.has_online_delivery;
         this.has_table_booking = data.has_table_booking;
         this.id = data.id;
@@ -312,7 +312,10 @@ var app = app || {};
             if (u.loggedIn == true && u !== undefined) {
 
 
-                setTimeout(function(){ $('#list-slot').find('.faver').show()}, 1000);
+                setTimeout(function(){ 
+                    $('#list-slot').find('.faver').show();
+                    $('#detail-slot').find('.faver').show()
+                }, 1000);
                 $('li[data-nav_id="my-favorites"]').show()
                 $('li[data-nav_id="login"]').hide()
                 $('li[data-nav_id="admin"]').hide()
@@ -327,7 +330,10 @@ var app = app || {};
         }
         else{
             $('li[data-nav_id="my-favorites"]').hide()
-            setTimeout(function(){ $('#list-slot').find('.faver').hide()}, 1000);
+            setTimeout(function(){ 
+                $('#list-slot').find('.faver').hide();
+                $('#detail-slot').find('.faver').hide()
+        }, 1000);
         }
     }
     Admin.fetchUsers = (email,callback) => {

@@ -14,8 +14,6 @@ var app = app || {};
         <p id="rvw-text">{{review_text}}</p>
         
         </div>
-
-        <hr>
     `
     /*
     <p>likes = {{likes}}</p>
