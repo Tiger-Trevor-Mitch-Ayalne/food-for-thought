@@ -26,7 +26,29 @@
                 <div id="line-2"></div>
                 <div id="line-3"></div>
             </div>
+
+            <ul id="menu">
+                <li data-nav_id="home" style="color:white; text-decoration: none;">
+                    <a href="/">Home</a>
+                </li>
+                <li data-nav_id="about">
+                    <a href="/about-us-view">About Us</a>
+                </li>
+                <li data-nav_id="contact">
+                    <a href="/contact-us-view">Contact Us</a>
+                </li>
+                <li data-nav_id="register">
+                    <a href="/register-view">Register</a>
+                </li>
+                <li data-nav_id="login">
+                    <a href="/login-view">Login</a>
+                </li>
+                <li data-nav_id="admin">
+                    <a href="/admin-view">Admin</a>
+                </li>
+            </ul>
         </div>
+
         <div id="main-menu-view" class="menu">
             <div id="main-menu-slot">
 
@@ -104,22 +126,33 @@
                 $("#fave").on('click', function () {
                     console.log($(this).attr('data-res_id'));
                 })
-                $('#searchByZIP').on('click', function (e) {
+                $('#searchByZIP').on('click',function(e){
                     e.preventDefault()
                     var zip = $('#zip').val();
                     console.log($('#zip').val())
-                    $.get('http://api.zippopotam.us/us/' + zip)
-                        .then((data) => {
-                            zipData = {
-                                zip: data['post code'],
-                                latitude: data.places[0].latitude,
-                                longitude: data.places[0].longitude
-                            }
-                            localStorage.setItem('zipData', JSON.stringify(zipData));
-                        })
-                        .catch(function (err) {
-                            console.error(err)
-                        });
+                    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+zip;
+                    $.get(url)
+                    .then(function(reviewsTestData){
+                        for(var index in reviewsTestData){
+                            console.log('formatted_address',reviewsTestData[index][0].formatted_address,'lat',reviewsTestData[index][0].geometry.location.lat,'lng',reviewsTestData[index][0].geometry.location.lng)
+                        var zipData = {
+                            zip: reviewsTestData[index][0].formatted_address,
+                            latitude: reviewsTestData[index][0].geometry.location.lat,
+                            longitude: reviewsTestData[index][0].geometry.location.lng
+                        }
+                        localStorage.setItem('zipData', JSON.stringify(zipData));
+                    }
+
+                    $('#list-slot').empty()
+                    })
+                    .then(function(){ 
+                        //alert()
+                    })
+                    .catch(function(err){ 
+                        //console.error(err)
+                        $('#zip-search-view').hide()
+                        app.ListView.init() 
+                    });
                 });
             });
         </script>
