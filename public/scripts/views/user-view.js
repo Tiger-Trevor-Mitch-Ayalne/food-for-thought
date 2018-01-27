@@ -53,17 +53,19 @@ var app = app || {};
         app.NearbyRes.getFaves(()=>{
             renderThings()
         },()=>{
-            $("#delete-fave").on('click',function(){
-                console.log('delete-fave clicked')
-                var fave_id = $(this).attr('data-fave_id');
-                app.NearbyRes.deletefaveIt(fave_id);
-                app.NearbyRes.getFaves(()=>{
-                    renderThings();
-                });
+              $( ".rst-top-level" ).on('click',function ( event ) {
+                  var fav_id = $( this ).children( ".menu" ).find('.delete-fave').attr('data-fave_id');
+                  console.log('fav_id',fav_id);
+                  var fav_name = $( this ).children('.rst-info').find( ".rst-name" ).text();
+                  console.log('fav_name',fav_name);
 
+                  confirm('Delete '+$( this ).children('.rst-info').find( ".rst-name" ).text())
+                  app.NearbyRes.deletefaveIt($( this ).children( ".menu" ).find('.delete-fave').attr('data-fave_id'));
+                  $(this).remove()
+                  app.NearbyRes.deleteFaveArray($( this ).children( ".menu" ).find('.delete-fave').attr('data-fave_id'))
+                  event.preventDefault();
+                });
             })
-        });
-        
     }
     module.UserView = UserView
 })(app)
