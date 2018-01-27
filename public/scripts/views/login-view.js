@@ -27,13 +27,15 @@ var app = app || {};
         renderThings()
         $('#login-view').show()
         $('#userLogForm').off()
-        app.Admin.fetchUsers()
         // handle UserForm
         $('#login').on('click', function (e) {
-            var user = $('#email_logForm').val();
-            app.Admin.fetchUsers(user)
-            page('/')
             e.preventDefault()
+            var email = $('#email_logForm').val();
+            app.Admin.fetchUsers(email,()=>{
+                $('#list-view').show()
+                page('/')
+                app.ListView.init()
+            })
         });
         app.NearbyRes.getFaves()
 

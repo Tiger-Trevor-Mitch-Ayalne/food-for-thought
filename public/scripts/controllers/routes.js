@@ -8,14 +8,12 @@ page('/*', (ctx, next) => {
 page('/', ()=>{
     app.ListView.init()
     app.TopHeaderView.init()
-    app.SideNavView.init()
     
 })
 page('/detail-view/:id', (ctx) =>{
         app.NearbyRes.fetchOne(ctx.params.id);
         app.DetailView.init(ctx.params.id);
         app.TopHeaderView.init()
-        app.SideNavView.init()
 })
 page('/login-view', app.LoginView.init)
 page('/register-view', app.RegisterView.init)

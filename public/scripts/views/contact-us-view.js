@@ -4,11 +4,10 @@ var app = app || {};
     const ContactUsView = {};
 
     const markup = `
-        <h1>
-            Contact Us View
-        </h1>
-        <div style="margin-left:10%;">
-            We want to hear from you. Send us a note.
+        <div style="margin:10%;">
+        <img class="featured-image" src="http://lorempixel.com/output/food-q-c-640-480-8.jpg"> <strong>We've got a hunger for your feedback. </strong>
+        <br> 
+        {{{write_up}}}
         </div>
     `
     const template = Handlebars.compile(markup)

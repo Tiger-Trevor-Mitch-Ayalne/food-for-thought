@@ -33,9 +33,7 @@ var app = app || {};
             </div>
             <div id="googleMap" style="width:70%;height:300px;"></div>
         </div>
-
-        
-        
+        <div id="googleMap" style="width:70%;height:300px;"></div>
     `
     const template = Handlebars.compile(markup)
 
@@ -45,6 +43,21 @@ var app = app || {};
     }
     DetailView.init = (id) => {
         console.log(app.NearbyRes.res_id.latitude,app.NearbyRes.res_id.longitude)
+        function googleMap() {
+            var gMapslong = app.NearbyRes.res_id.longitude * 1;
+            var gMapslat = app.NearbyRes.res_id.latitude * 1;
+            var myCenter = new google.maps.LatLng(gMapslat, gMapslong);
+            var mapCanvas = document.getElementById("googleMap");
+            var mapOptions = {
+                center: myCenter,
+                zoom: 14
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({
+                position: myCenter
+            });
+            marker.setMap(map);
+        }
         $('#detail-view').off()
         $('#detail-slot').empty()
         renderThings(id)
