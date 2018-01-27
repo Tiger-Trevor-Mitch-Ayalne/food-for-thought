@@ -4,6 +4,7 @@ var app = app || {};
     const AboutUsView = {};
 
     const markup = `
+
         <div class= "profile";>
         <img class="featured-image-profile" src={{img_src}}>
     

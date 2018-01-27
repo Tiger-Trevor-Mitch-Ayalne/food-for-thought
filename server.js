@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const superagent = require('superagent');
 const pg = require('pg');
 const fs = require('fs');
-const conString = 'postgres://postgres:1234@localhost:5432/grub';
-// const conString = 'postgres://postgres:tabinLync@localhost:5432/cf301js';
+// const conString = 'postgres://postgres:1234@localhost:5432/grub';
+const conString = 'postgres://postgres:tabinLync@localhost:5432/cf301js';
 
 const client = new pg.Client(conString);
 
